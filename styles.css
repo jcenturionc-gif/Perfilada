@@ -1,0 +1,4725 @@
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 1/10
+====================================================*/
+
+/*=========================
+VARIABLES
+=========================*/
+
+:root{
+
+  --entel:#005BAC;
+  --entel2:#0077d4;
+
+  --verde:#16a34a;
+  --verde2:#22c55e;
+
+  --rojo:#dc2626;
+  --amarillo:#f59e0b;
+  --azul:#2563eb;
+
+  --gris:#64748b;
+  --grisClaro:#f4f7fb;
+
+  --borde:#e5e7eb;
+
+  --shadow:0 10px 28px rgba(15,23,42,.08);
+
+  --radius:18px;
+
+  --transition:.30s;
+
+}
+
+/*=========================
+RESET
+=========================*/
+
+*{
+
+  margin:0;
+
+  padding:0;
+
+  box-sizing:border-box;
+
+  font-family:
+
+  "Segoe UI",
+
+  Roboto,
+
+  Arial,
+
+  sans-serif;
+
+}
+
+html{
+
+  scroll-behavior:smooth;
+
+}
+
+body{
+
+  background:linear-gradient(180deg,#edf3fb,#f8fbff);
+
+  color:#334155;
+
+}
+
+/*=========================
+SCROLLBAR
+=========================*/
+
+::-webkit-scrollbar{
+
+  width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+  background:#edf2f7;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+  background:var(--entel);
+
+  border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+  background:#004b8d;
+
+}
+
+/*=========================
+LAYOUT
+=========================*/
+
+.app{
+
+  display:flex;
+
+  min-height:100vh;
+
+}
+
+/*=========================
+SIDEBAR
+=========================*/
+
+.sidebar{
+
+  width:270px;
+
+  background:linear-gradient(180deg,#005BAC,#003D78);
+
+  color:white;
+
+  padding:30px;
+
+  position:sticky;
+
+  top:0;
+
+  height:100vh;
+
+  box-shadow:5px 0 25px rgba(0,0,0,.15);
+
+}
+
+.logo{
+
+  margin-bottom:45px;
+
+}
+
+.logo h2{
+
+  font-size:34px;
+
+  letter-spacing:2px;
+
+}
+
+.logo span{
+
+  font-size:14px;
+
+  opacity:.85;
+
+}
+
+.sidebar nav{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:10px;
+
+}
+
+.sidebar nav a{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:14px 18px;
+
+  border-radius:12px;
+
+  text-decoration:none;
+
+  color:white;
+
+  cursor:pointer;
+
+  transition:var(--transition);
+
+  font-size:15px;
+
+}
+
+.sidebar nav a:hover{
+
+  background:rgba(255,255,255,.14);
+
+  transform:translateX(6px);
+
+}
+
+.sidebar nav .activo{
+
+  background:white;
+
+  color:var(--entel);
+
+  font-weight:700;
+
+}
+
+/*=========================
+CONTENIDO
+=========================*/
+
+.contenido{
+
+  flex:1;
+
+  padding:35px;
+
+}
+
+/*=========================
+HEADER
+=========================*/
+
+header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  margin-bottom:30px;
+
+}
+
+header h1{
+
+  color:var(--entel);
+
+  font-size:34px;
+
+  margin-bottom:8px;
+
+}
+
+header small{
+
+  color:var(--gris);
+
+}
+
+/*=========================
+FILTROS
+=========================*/
+
+.filtros{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  gap:18px;
+
+  margin-bottom:32px;
+
+}
+
+.filtros select{
+
+  background:white;
+
+  border:1px solid #dbe4ef;
+
+  border-radius:12px;
+
+  padding:14px;
+
+  font-size:15px;
+
+  transition:var(--transition);
+
+}
+
+.filtros select:hover{
+
+  border-color:var(--entel);
+
+}
+
+.filtros select:focus{
+
+  outline:none;
+
+  border-color:var(--entel);
+
+  box-shadow:0 0 0 4px rgba(0,91,172,.15);
+
+}
+
+/*=========================
+KPIs
+=========================*/
+
+.kpis{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  gap:22px;
+
+  margin-bottom:35px;
+
+}
+
+.card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:24px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  box-shadow:var(--shadow);
+
+  transition:var(--transition);
+
+}
+
+.card:hover{
+
+  transform:translateY(-6px);
+
+  box-shadow:0 18px 35px rgba(15,23,42,.12);
+
+}
+
+.card::before{
+
+  content:"";
+
+  position:absolute;
+
+  left:0;
+
+  top:0;
+
+  width:6px;
+
+  height:100%;
+
+  background:linear-gradient(var(--entel),#38bdf8);
+
+}
+
+.card::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:90px;
+
+  height:90px;
+
+  border-radius:50%;
+
+  top:-30px;
+
+  right:-30px;
+
+  background:rgba(0,91,172,.05);
+
+}
+
+.card span{
+
+  color:var(--gris);
+
+  font-size:14px;
+
+}
+
+.card h2{
+
+  margin-top:18px;
+
+  color:var(--entel);
+
+  font-size:34px;
+
+  font-weight:700;
+
+}
+
+/* Colores automáticos */
+
+.card:nth-child(2)::before{
+
+  background:linear-gradient(#16a34a,#4ade80);
+
+}
+
+.card:nth-child(3)::before{
+
+  background:linear-gradient(#f59e0b,#facc15);
+
+}
+
+.card:nth-child(4)::before{
+
+  background:linear-gradient(#9333ea,#c084fc);
+
+}
+
+.card:nth-child(5)::before{
+
+  background:linear-gradient(#dc2626,#fb7185);
+
+}
+
+.card:nth-child(6)::before{
+
+  background:linear-gradient(#0891b2,#22d3ee);
+
+}
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 2/10
+PANELES · GRID · EXECUTIVE · COACH · ALERTAS
+====================================================*/
+
+/*========================================
+PANELES
+========================================*/
+
+.panel{
+
+  background:#fff;
+
+  border-radius:20px;
+
+  padding:28px;
+
+  box-shadow:var(--shadow);
+
+  margin-bottom:34px;
+
+  transition:var(--transition);
+
+}
+
+.panel:hover{
+
+  box-shadow:0 18px 35px rgba(15,23,42,.10);
+
+}
+
+.panel h2{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+
+  color:var(--entel);
+
+  font-size:20px;
+
+  margin-bottom:22px;
+
+  padding-bottom:14px;
+
+  border-bottom:2px solid var(--grisClaro);
+
+}
+
+.panel h2::after{
+
+  content:"";
+
+  flex:1;
+
+  height:2px;
+
+  background:#dbeafe;
+
+}
+
+/*========================================
+GRID
+========================================*/
+
+.grid2{
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:24px;
+
+  margin-bottom:30px;
+
+}
+
+/*========================================
+EXECUTIVE 360
+========================================*/
+
+#panelEjecutivo{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+  gap:20px;
+
+}
+
+.ejecutivo-card{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:24px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  box-shadow:var(--shadow);
+
+  transition:var(--transition);
+
+}
+
+.ejecutivo-card:hover{
+
+  transform:translateY(-6px);
+
+}
+
+.ejecutivo-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  right:-45px;
+
+  top:-45px;
+
+  width:120px;
+
+  height:120px;
+
+  border-radius:50%;
+
+  background:rgba(0,91,172,.05);
+
+}
+
+.titulo-card{
+
+  font-size:13px;
+
+  color:var(--gris);
+
+  letter-spacing:.8px;
+
+  text-transform:uppercase;
+
+}
+
+.ejecutivo-card h3{
+
+  margin-top:10px;
+
+  color:#0f172a;
+
+  font-size:22px;
+
+}
+
+.dato-grande{
+
+  font-size:44px;
+
+  font-weight:700;
+
+  color:var(--entel);
+
+  margin:18px 0;
+
+}
+
+.detalle{
+
+  color:var(--gris);
+
+  line-height:1.7;
+
+}
+
+/*========================================
+COACH IA
+========================================*/
+
+#coachIA{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+  gap:20px;
+
+}
+
+.coach-card{
+
+  background:#f8fbff;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:var(--shadow);
+
+  transition:.30s;
+
+}
+
+.coach-card:hover{
+
+  transform:translateY(-5px);
+
+}
+
+.coach-card h3{
+
+  color:#0f172a;
+
+  margin-bottom:14px;
+
+  font-size:18px;
+
+}
+
+.coach-card p{
+
+  line-height:1.8;
+
+  color:#475569;
+
+}
+
+.coach-card ul{
+
+  margin-top:14px;
+
+  padding-left:20px;
+
+}
+
+.coach-card li{
+
+  margin:8px 0;
+
+}
+
+.coach-info{
+
+  border-left:8px solid var(--azul);
+
+}
+
+.coach-ok{
+
+  border-left:8px solid var(--verde);
+
+}
+
+.coach-warning{
+
+  border-left:8px solid var(--amarillo);
+
+}
+
+.coach-danger{
+
+  border-left:8px solid var(--rojo);
+
+}
+
+/*========================================
+SUPERVISIÓN
+========================================*/
+
+#panelSupervision{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+  gap:18px;
+
+}
+
+.card-supervision{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:var(--shadow);
+
+  transition:.3s;
+
+}
+
+.card-supervision:hover{
+
+  transform:translateY(-5px);
+
+}
+
+.card-supervision h3{
+
+  color:var(--entel);
+
+  margin-bottom:16px;
+
+}
+
+.card-supervision table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+}
+
+.card-supervision td{
+
+  padding:10px 0;
+
+  border-bottom:1px solid #edf2f7;
+
+  color:#475569;
+
+}
+
+.card-supervision tr:last-child td{
+
+  border:none;
+
+}
+
+/*========================================
+ESTADOS
+========================================*/
+
+.estado{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:6px 14px;
+
+  border-radius:25px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+.estado.verde{
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+}
+
+.estado.amarillo{
+
+  background:#fef3c7;
+
+  color:#a16207;
+
+}
+
+.estado.rojo{
+
+  background:#fee2e2;
+
+  color:#b91c1c;
+
+}
+
+.estado.azul{
+
+  background:#dbeafe;
+
+  color:#1d4ed8;
+
+}
+
+/*========================================
+ALERTAS
+========================================*/
+
+#panelAlertas{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+
+  gap:18px;
+
+}
+
+.alerta{
+
+  display:flex;
+
+  gap:16px;
+
+  align-items:flex-start;
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:18px;
+
+  box-shadow:var(--shadow);
+
+  transition:.30s;
+
+}
+
+.alerta:hover{
+
+  transform:translateY(-4px);
+
+}
+
+.alerta strong{
+
+  font-size:28px;
+
+  line-height:1;
+
+}
+
+.alerta div{
+
+  flex:1;
+
+}
+
+.alerta b{
+
+  display:block;
+
+  margin-bottom:6px;
+
+  color:#0f172a;
+
+}
+
+.alerta small{
+
+  display:block;
+
+  margin-top:6px;
+
+  color:var(--gris);
+
+}
+
+.alerta.ok{
+
+  border-left:7px solid var(--verde);
+
+}
+
+.alerta.warning{
+
+  border-left:7px solid var(--amarillo);
+
+}
+
+.alerta.danger{
+
+  border-left:7px solid var(--rojo);
+
+}
+
+.alerta.info{
+
+  border-left:7px solid var(--azul);
+
+}
+
+.alerta.primary{
+
+  border-left:7px solid var(--entel);
+
+}
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 3/10
+RANKING · EMBUDO · INSIGHTS · COMPARATIVO
+====================================================*/
+
+/*========================================
+RANKING GENERAL
+========================================*/
+
+#panelRanking,
+#panelTop10,
+#panelBottom10{
+
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+
+}
+
+.ranking-item{
+
+    display:flex;
+    align-items:center;
+    gap:18px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px 22px;
+
+    box-shadow:var(--shadow);
+
+    transition:.30s;
+
+}
+
+.ranking-item:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 18px 35px rgba(15,23,42,.10);
+
+}
+
+.ranking-medalla{
+
+    width:42px;
+
+    text-align:center;
+
+    font-size:26px;
+
+    flex-shrink:0;
+
+}
+
+.ranking-info{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.ranking-nombre{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+    font-weight:700;
+
+    color:#0f172a;
+
+    margin-bottom:10px;
+
+}
+
+.ranking-nivel{
+
+    font-size:11px;
+
+    background:#eef6ff;
+
+    color:var(--entel);
+
+    padding:3px 10px;
+
+    border-radius:20px;
+
+    font-weight:700;
+
+}
+
+.ranking-barra-fondo{
+
+    height:18px;
+
+    background:#eef2f7;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.ranking-barra-relleno{
+
+    height:100%;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        90deg,
+        var(--entel),
+        #2ea7ff
+    );
+
+    transition:width .6s;
+
+}
+
+.ranking-score{
+
+    width:80px;
+
+    text-align:right;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:var(--entel);
+
+}
+
+/*========================================
+EMBUDO COMERCIAL
+========================================*/
+
+#panelEmbudo{
+
+    width:100%;
+
+}
+
+.funnel-grid{
+
+    display:grid;
+
+    grid-template-columns: 1fr 1.15fr;
+
+    gap:24px;
+
+    align-items:start;
+
+}
+
+.funnel-story-col{
+
+    display:flex;
+
+}
+
+.funnel-story-col .funnel-story{
+
+    width:100%;
+
+}
+
+.funnel-cards-col{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+
+}
+
+@media(max-width:900px){
+
+    .funnel-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+.funnel-story{
+
+    background:#f7f9fc;
+
+    border-radius:14px;
+
+    padding:18px 22px;
+
+    border-left:5px solid var(--entel);
+
+}
+
+.funnel-story.tono-critico{ border-left-color:#dc2626; }
+.funnel-story.tono-alerta{ border-left-color:#f59e0b; }
+.funnel-story.tono-positivo{ border-left-color:#16a34a; }
+
+.funnel-story-tag{
+
+    display:inline-block;
+
+    background:#e7edf7;
+
+    color:#005BAC;
+
+    padding:4px 12px;
+
+    border-radius:20px;
+
+    font-size:10.5px;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    text-transform:uppercase;
+
+    margin-bottom:10px;
+
+}
+
+.funnel-story p{
+
+    font-size:13px;
+
+    color:#334155;
+
+    line-height:1.6;
+
+    margin:0 0 8px 0;
+
+}
+
+.funnel-story p:last-child{ margin-bottom:0; }
+
+.funnel-story strong{ color:#0f172a; }
+
+.funnel-card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:14px 20px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.funnel-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:10px;
+
+}
+
+.funnel-header span{
+
+    color:var(--gris);
+
+    font-size:12.5px;
+
+    font-weight:600;
+
+    letter-spacing:.5px;
+
+}
+
+.funnel-header strong{
+
+    font-size:17px;
+
+    color:#0f172a;
+
+}
+
+.funnel-bar{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#edf2f7;
+
+    height:16px;
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+}
+
+.funnel-fill{
+
+    height:100%;
+
+    border-radius:30px;
+
+    transition:width .8s ease;
+
+}
+
+.funnel-arrow{
+
+    text-align:center;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    color:var(--gris);
+
+    padding:2px 0;
+
+}
+
+/*========================================
+INSIGHTS
+========================================*/
+
+#panelInsights{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(260px,1fr));
+
+    gap:20px;
+
+}
+
+.insight{
+
+    background:#fbfcff;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:var(--shadow);
+
+    border-left:7px solid var(--gris);
+
+    transition:.30s;
+
+}
+
+.insight:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.insight h3{
+
+    font-size:16px;
+
+    margin-bottom:10px;
+
+    color:#0f172a;
+
+}
+
+.insight p{
+
+    color:var(--gris);
+
+    line-height:1.6;
+
+    margin-bottom:12px;
+
+}
+
+.insight strong{
+
+    display:block;
+
+    font-size:24px;
+
+    color:#0f172a;
+
+}
+
+.insight.verde{
+
+    border-left-color:var(--verde);
+
+}
+
+.insight.azul{
+
+    border-left-color:var(--azul);
+
+}
+
+.insight.naranja{
+
+    border-left-color:var(--amarillo);
+
+}
+
+.insight.rojo{
+
+    border-left-color:var(--rojo);
+
+}
+
+/*========================================
+COMPARATIVO SEMANAL
+========================================*/
+
+#panelComparativoSemanal{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+}
+
+#panelComparativoSemanal .card{
+
+    border-top:5px solid var(--entel);
+
+}
+
+#panelComparativoSemanal .card h3{
+
+    margin-bottom:10px;
+
+    color:#0f172a;
+
+}
+
+#panelComparativoSemanal .card p{
+
+    color:var(--gris);
+
+    line-height:1.6;
+
+}
+
+#panelComparativoSemanal .card strong{
+
+    font-size:28px;
+
+    color:var(--entel);
+
+}
+
+/*========================================
+ANIMACIONES
+========================================*/
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.panel,
+.card,
+.alerta,
+.ranking-item,
+.insight,
+.funnel-card{
+
+    animation:aparecer .4s ease;
+
+}
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 4/10
+GRÁFICOS · TABLA · TOP/BOTTOM · CUARTILES
+====================================================*/
+
+/*========================================
+GRÁFICOS
+========================================*/
+
+.graficos{
+
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:26px;
+
+  margin-bottom:34px;
+
+}
+
+.graficos .panel{
+
+  overflow:hidden;
+
+}
+
+.graficos canvas{
+
+  width:100% !important;
+
+  height:360px !important;
+
+}
+
+/*========================================
+TOP 10 / BOTTOM 10
+========================================*/
+
+#panelTop10,
+#panelBottom10{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:16px;
+
+}
+
+.top-item,
+.bottom-item{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:18px;
+
+  border-radius:16px;
+
+  background:white;
+
+  box-shadow:var(--shadow);
+
+  transition:.30s;
+
+}
+
+.top-item:hover,
+.bottom-item:hover{
+
+  transform:translateY(-4px);
+
+}
+
+.top-item{
+
+  border-left:6px solid var(--verde);
+
+}
+
+.bottom-item{
+
+  border-left:6px solid var(--rojo);
+
+}
+
+.top-item .nombre,
+.bottom-item .nombre{
+
+  font-weight:700;
+
+  color:#0f172a;
+
+}
+
+.top-item .valor{
+
+  color:var(--verde);
+
+  font-size:22px;
+
+  font-weight:700;
+
+}
+
+.bottom-item .valor{
+
+  color:var(--rojo);
+
+  font-size:22px;
+
+  font-weight:700;
+
+}
+
+/*========================================
+CUARTILES
+========================================*/
+
+#panelCuartiles{
+
+  display:grid;
+
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+  gap:20px;
+
+}
+
+.cuartil{
+
+  background:white;
+
+  border-radius:18px;
+
+  padding:22px;
+
+  box-shadow:var(--shadow);
+
+  transition:.30s;
+
+  text-align:center;
+
+}
+
+.cuartil:hover{
+
+  transform:translateY(-5px);
+
+}
+
+.cuartil h3{
+
+  margin-bottom:12px;
+
+  color:var(--entel);
+
+}
+
+.cuartil strong{
+
+  display:block;
+
+  font-size:32px;
+
+  margin:12px 0;
+
+  color:#0f172a;
+
+}
+
+.cuartil span{
+
+  color:var(--gris);
+
+}
+
+/*========================================
+TABLA
+========================================*/
+
+table{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+}
+
+thead{
+
+  position:sticky;
+
+  top:0;
+
+  z-index:10;
+
+  background:linear-gradient(
+      90deg,
+      var(--entel),
+      var(--entel2)
+  );
+
+  color:white;
+
+}
+
+thead th{
+
+  padding:16px;
+
+  text-align:center;
+
+  font-size:14px;
+
+  font-weight:700;
+
+}
+
+tbody td{
+
+  padding:14px;
+
+  border-bottom:1px solid var(--borde);
+
+  text-align:center;
+
+}
+
+tbody tr{
+
+  transition:.25s;
+
+}
+
+tbody tr:nth-child(even){
+
+  background:#fafcff;
+
+}
+
+tbody tr:hover{
+
+  background:#eef6ff;
+
+}
+
+tbody td:first-child{
+
+  text-align:left;
+
+  font-weight:600;
+
+}
+
+/*========================================
+BADGES
+========================================*/
+
+.badge{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:5px 12px;
+
+  border-radius:25px;
+
+  font-size:12px;
+
+  font-weight:700;
+
+}
+
+.badge.success{
+
+  background:#dcfce7;
+
+  color:#15803d;
+
+}
+
+.badge.warning{
+
+  background:#fef3c7;
+
+  color:#a16207;
+
+}
+
+.badge.danger{
+
+  background:#fee2e2;
+
+  color:#b91c1c;
+
+}
+
+.badge.info{
+
+  background:#dbeafe;
+
+  color:#1d4ed8;
+
+}
+
+/*========================================
+BARRAS DE PROGRESO
+========================================*/
+
+.progress{
+
+  width:100%;
+
+  height:10px;
+
+  background:#edf2f7;
+
+  border-radius:20px;
+
+  overflow:hidden;
+
+}
+
+.progress div{
+
+  height:100%;
+
+  border-radius:20px;
+
+  background:linear-gradient(
+      90deg,
+      var(--entel),
+      #3ab0ff
+  );
+
+  transition:width .5s;
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 5/10
+RESPONSIVE · EFECTOS · ACABADOS
+====================================================*/
+
+/*========================================
+EFECTOS GENERALES
+========================================*/
+
+.card,
+.panel,
+.alerta,
+.insight,
+.ranking-item,
+.top-item,
+.bottom-item,
+.cuartil,
+.funnel-card,
+.coach-card,
+.ejecutivo-card,
+.card-supervision{
+
+    transition:
+        transform .30s,
+        box-shadow .30s,
+        background .30s;
+
+}
+
+.card:hover,
+.panel:hover,
+.alerta:hover,
+.insight:hover,
+.ranking-item:hover,
+.top-item:hover,
+.bottom-item:hover,
+.cuartil:hover,
+.funnel-card:hover,
+.coach-card:hover,
+.ejecutivo-card:hover,
+.card-supervision:hover{
+
+    box-shadow:
+    0 18px 40px rgba(15,23,42,.12);
+
+}
+
+/*========================================
+SOMBRAS MÁS SUAVES
+========================================*/
+
+.card,
+.panel{
+
+    border:1px solid rgba(226,232,240,.8);
+
+}
+
+/*========================================
+SEPARACIÓN ENTRE SECCIONES
+========================================*/
+
+section{
+
+    margin-bottom:34px;
+
+}
+
+/*========================================
+LINKS
+========================================*/
+
+a{
+
+    transition:.25s;
+
+}
+
+a:hover{
+
+    opacity:.95;
+
+}
+
+/*========================================
+BOTONES (PARA FUTURO)
+========================================*/
+
+.btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.30s;
+
+}
+
+.btn-primary{
+
+    background:var(--entel);
+
+    color:white;
+
+}
+
+.btn-primary:hover{
+
+    background:#004d93;
+
+}
+
+.btn-success{
+
+    background:var(--verde);
+
+    color:white;
+
+}
+
+.btn-success:hover{
+
+    background:#15803d;
+
+}
+
+.btn-warning{
+
+    background:var(--amarillo);
+
+    color:white;
+
+}
+
+.btn-danger{
+
+    background:var(--rojo);
+
+    color:white;
+
+}
+
+/*========================================
+RESPONSIVE 1200px
+========================================*/
+
+@media(max-width:1200px){
+
+    .grid2{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .graficos{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/*========================================
+RESPONSIVE 992px
+========================================*/
+
+@media(max-width:992px){
+
+    .sidebar{
+
+        width:220px;
+
+        padding:24px 20px;
+
+    }
+
+    .kpis{
+
+        grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    }
+
+    #panelInsights{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/*========================================
+RESPONSIVE 768px
+========================================*/
+
+@media(max-width:768px){
+
+    .app{
+
+        flex-direction:column;
+
+    }
+
+    .sidebar{
+
+        width:100%;
+
+        height:auto;
+
+        position:relative;
+
+        padding:16px 20px;
+
+        display:flex;
+
+        align-items:center;
+
+        justify-content:space-between;
+
+        flex-wrap:wrap;
+
+        gap:12px;
+
+    }
+
+    .logo{
+
+        margin-bottom:0;
+
+    }
+
+    .logo h2{
+
+        font-size:22px;
+
+    }
+
+    .logo span{
+
+        font-size:11.5px;
+
+    }
+
+    .sidebar nav{
+
+        flex-direction:row;
+
+        flex-wrap:wrap;
+
+        gap:8px;
+
+    }
+
+    .sidebar nav a{
+
+        padding:9px 14px;
+
+        font-size:13px;
+
+    }
+
+    .sidebar nav a:hover{
+
+        transform:none;
+
+    }
+
+    .contenido{
+
+        padding:20px;
+
+    }
+
+    header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+
+    }
+
+    header h1{
+
+        font-size:28px;
+
+    }
+
+    .filtros{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .kpis{
+
+        grid-template-columns:1fr 1fr;
+
+    }
+
+    .graficos canvas{
+
+        height:300px !important;
+
+    }
+
+}
+
+/*========================================
+RESPONSIVE 576px
+========================================*/
+
+@media(max-width:576px){
+
+    .kpis{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .ranking-item{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .ranking-score{
+
+        width:100%;
+
+        text-align:left;
+
+    }
+
+    table{
+
+        display:block;
+
+        overflow-x:auto;
+
+    }
+
+}
+
+/*========================================
+ANIMACIONES
+========================================*/
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.fade-up{
+
+    animation:fadeUp .45s ease;
+
+}
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.02);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.kpi-destacado{
+
+    animation:pulse 2s infinite;
+
+}
+
+/*========================================
+UTILIDADES
+========================================*/
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.mt-10{
+
+    margin-top:10px;
+
+}
+
+.mt-20{
+
+    margin-top:20px;
+
+}
+
+.mb-10{
+
+    margin-bottom:10px;
+
+}
+
+.mb-20{
+
+    margin-bottom:20px;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+.w-100{
+
+    width:100%;
+
+}
+/*========================================
+MÉTODOS DE ENTREGA
+========================================*/
+
+#panelMetodosEntrega{
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.metodos-resumen h3,
+.metodos-detalle h3{
+  color:var(--entel);
+  font-size:17px;
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:2px solid var(--grisClaro);
+}
+
+.tabla-metodos{
+  width:100%;
+  border-collapse:collapse;
+  border-radius:14px;
+  overflow:hidden;
+  font-size:14px;
+}
+
+.tabla-metodos thead{
+  background:linear-gradient(90deg,var(--entel),var(--entel2));
+  color:white;
+}
+
+.tabla-metodos thead th{
+  padding:14px 12px;
+  text-align:center;
+  font-size:13px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.tabla-metodos tbody td{
+  padding:12px;
+  text-align:center;
+  border-bottom:1px solid var(--borde);
+}
+
+.tabla-metodos tbody tr:nth-child(even){
+  background:#fafcff;
+}
+
+.tabla-metodos tbody tr:hover{
+  background:#eef6ff;
+}
+
+.tabla-metodos tbody td:first-child{
+  text-align:left;
+  font-weight:600;
+}
+
+.tabla-metodos .col-asesor{
+  min-width:160px;
+  white-space:nowrap;
+}
+
+.metodo-rep-cell{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:6px;
+}
+
+.metodo-rep-cell span{
+  font-weight:700;
+  color:#0f172a;
+  font-size:13px;
+}
+
+.metodo-progress{
+  width:100px;
+  height:8px;
+}
+
+.metodo-barra-a{
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--entel),#38bdf8);
+  transition:width .6s;
+}
+
+.metodo-barra-b{
+  height:100%;
+  border-radius:20px;
+  background:linear-gradient(90deg,#16a34a,#4ade80);
+  transition:width .6s;
+}
+
+.metodo-num{
+  display:block;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.metodo-pct{
+  display:block;
+  font-size:11px;
+  color:var(--gris);
+}
+
+.tabla-scroll{
+  overflow-x:auto;
+  border-radius:14px;
+}
+
+.toolbar{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  margin-bottom:20px;
+
+}
+
+/*=========================================
+BOTÓN COPIAR A CORREO
+=========================================*/
+
+.headerDashboard{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  margin-bottom:20px;
+
+  flex-wrap:wrap;
+
+}
+
+.btnCorreo{
+
+  background:#005BAC;
+
+  color:#fff;
+
+  border:none;
+
+  padding:14px 24px;
+
+  border-radius:12px;
+
+  font-size:15px;
+
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  box-shadow:0 6px 16px rgba(0,0,0,.15);
+
+}
+
+.btnCorreo:hover{
+
+  background:#00408f;
+
+  transform:translateY(-2px);
+
+}
+/*==================================
+HEADER
+==================================*/
+
+.headerDashboard{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:20px;
+
+  margin-bottom:25px;
+
+}
+
+.headerDashboard>div{
+
+  flex:1;
+
+}
+
+.btnCorreo{
+
+  background:#005BAC;
+
+  color:white;
+
+  border:none;
+
+  border-radius:12px;
+
+  padding:14px 22px;
+
+  font-size:15px;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  transition:.25s;
+
+  box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+}
+
+.btnCorreo:hover{
+
+  background:#00468f;
+
+  transform:translateY(-2px);
+
+}
+/*=========================================
+DETALLE POR EJECUTIVO (tabla compacta)
+=========================================*/
+
+#tablaEjecutivos{
+
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+  white-space:nowrap;
+
+}
+
+#tablaEjecutivos th{
+
+  background:#005BAC;
+  color:white;
+  padding:6px 8px;
+  text-align:center;
+  border:1px solid #dbe5f1;
+  font-size:11.5px;
+
+}
+
+#tablaEjecutivos td{
+
+  border:1px solid #dbe5f1;
+  padding:5px 8px;
+  text-align:center;
+
+}
+
+#tablaEjecutivos tbody tr:nth-child(even){
+  background:#f7f9fc;
+}
+
+#tablaEjecutivos td:first-child{
+  text-align:left;
+  font-weight:600;
+  background:#f2f6fb;
+  position:sticky;
+  left:0;
+}
+
+/*=========================================
+RESUMEN GERENCIAL
+=========================================*/
+
+.tablaResumenWrapper{
+
+  overflow-x:auto;
+
+  margin-top:20px;
+
+}
+
+#tablaResumenGerencial{
+
+  width:100%;
+
+  border-collapse:collapse;
+
+  font-size:12px;
+
+  white-space:nowrap;
+
+}
+
+#tablaResumenGerencial th{
+
+  background:#005BAC;
+
+  color:white;
+
+  padding:8px;
+
+  text-align:center;
+
+  border:1px solid #dbe5f1;
+
+}
+
+#tablaResumenGerencial td{
+
+  border:1px solid #dbe5f1;
+
+  padding:6px;
+
+  text-align:center;
+
+}
+
+#tablaResumenGerencial tbody tr:nth-child(even){
+
+  background:#f7f9fc;
+
+}
+
+#tablaResumenGerencial td:first-child{
+
+  text-align:left;
+
+  font-weight:600;
+
+  background:#f2f6fb;
+
+  position:sticky;
+
+  left:0;
+
+}
+
+/* Botón de semana (clic para contraer / expandir) */
+.th-semana-toggle{
+
+  cursor:pointer;
+
+  user-select:none;
+
+  transition:background .15s ease;
+
+}
+
+.th-semana-toggle:hover{
+
+  background:#00477f;
+
+}
+
+.icono-semana{
+
+  font-size:10px;
+
+  margin-left:4px;
+
+  display:inline-block;
+
+}
+
+/* Columna resumen de una semana contraída
+   (aplica a cualquier tabla del dashboard) */
+td.celda-semana{
+
+  background:#eaf1fb;
+
+  font-weight:700;
+
+  border-left:2px solid #005BAC;
+
+  border-right:2px solid #005BAC;
+
+}
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 6/10 · MEJORAS PARA PRESENTACIÓN EJECUTIVA
+        Tipografía · Storytelling · Loader · Toast · Power BI feel
+====================================================*/
+
+/*=========================
+TIPOGRAFÍA PREMIUM
+=========================*/
+
+*{
+  font-family:"Inter","Segoe UI",Roboto,Arial,sans-serif;
+}
+
+body{
+  background:linear-gradient(160deg,#eef4fb 0%,#f7fafd 45%,#eef6fb 100%);
+  background-attachment:fixed;
+}
+
+/*=========================
+HEADER · efecto "vidrio"
+=========================*/
+
+.headerDashboard{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:rgba(247,250,253,.85);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  padding:14px 6px 18px;
+  border-bottom:1px solid rgba(226,232,240,.7);
+}
+
+.headerDashboard h1{
+  letter-spacing:-.5px;
+}
+
+.headerDashboard small{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.headerDashboard small::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--verde2);
+  box-shadow:0 0 0 0 rgba(34,197,94,.6);
+  animation:pulseDot 2s infinite;
+}
+
+@keyframes pulseDot{
+  0%{ box-shadow:0 0 0 0 rgba(34,197,94,.55); }
+  70%{ box-shadow:0 0 0 8px rgba(34,197,94,0); }
+  100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
+}
+
+/*=========================
+STORYLINE · RESUMEN EJECUTIVO
+=========================*/
+
+.storyline{
+  display:grid;
+  grid-template-columns:1.7fr 1fr;
+  gap:26px;
+  align-items:stretch;
+  background:linear-gradient(120deg,#00335f,#005BAC 55%,#0077d4);
+  border-radius:22px;
+  padding:30px 34px;
+  margin-bottom:32px;
+  color:#fff;
+  box-shadow:0 22px 45px rgba(0,60,110,.25);
+  position:relative;
+  overflow:hidden;
+}
+
+.storyline::before{
+  content:"";
+  position:absolute;
+  width:340px;
+  height:340px;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  top:-160px;
+  right:-100px;
+}
+
+.storyline::after{
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  background:rgba(255,255,255,.05);
+  bottom:-120px;
+  left:20%;
+}
+
+.storyline-main{
+  position:relative;
+  z-index:1;
+}
+
+.storyline-tag{
+  display:inline-block;
+  background:rgba(255,255,255,.16);
+  padding:6px 14px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+
+.storyline-main h2{
+  font-size:26px;
+  line-height:1.3;
+  margin-bottom:14px;
+  max-width:620px;
+}
+
+.storyline-main p{
+  font-size:15px;
+  line-height:1.8;
+  opacity:.94;
+  max-width:640px;
+}
+
+.storyline-main strong{
+  font-weight:800;
+}
+
+.storyline-highlights{
+  position:relative;
+  z-index:1;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  justify-content:center;
+}
+
+.storyline-chip{
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.22);
+  border-radius:14px;
+  padding:14px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.storyline-chip span{
+  font-size:12px;
+  opacity:.85;
+}
+
+.storyline-chip strong{
+  font-size:17px;
+  font-weight:700;
+}
+
+.chip-verde{ border-left:5px solid #4ade80; }
+.chip-rojo{ border-left:5px solid #fb7185; }
+.chip-azul{ border-left:5px solid #38bdf8; }
+
+.storyline-chips-row{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:14px;
+  margin-top:18px;
+  position:relative;
+  z-index:1;
+}
+
+.storyline-chips-row .storyline-chip{
+  margin:0;
+}
+
+@media (max-width: 1100px){
+  .storyline-chips-row{
+    grid-template-columns:repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px){
+  .storyline-chips-row{
+    grid-template-columns:1fr;
+  }
+}
+
+.storyline-critico{
+  background:linear-gradient(120deg,#7a1420,#b91c1c 55%,#dc2626);
+  box-shadow:0 22px 45px rgba(153,27,27,.25);
+}
+
+.storyline-alerta{
+  background:linear-gradient(120deg,#7a4b06,#b45309 55%,#f59e0b);
+  box-shadow:0 22px 45px rgba(180,83,9,.22);
+}
+
+/*=========================
+LOADER INICIAL
+=========================*/
+
+.app-loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(160deg,#00335f,#005BAC);
+  transition:opacity .4s ease, visibility .4s ease;
+}
+
+.app-loader.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.app-loader-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:16px;
+  color:#fff;
+}
+
+.app-loader-logo{
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:3px;
+}
+
+.app-loader-box span{
+  font-size:14px;
+  opacity:.85;
+}
+
+.spinner{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:4px solid rgba(255,255,255,.25);
+  border-top-color:#fff;
+  animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+/*=========================
+TOAST DE ERRORES
+=========================*/
+
+.app-toast{
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  z-index:9998;
+  background:#1f2937;
+  color:#fff;
+  padding:14px 20px;
+  border-radius:12px;
+  font-size:14px;
+  max-width:340px;
+  box-shadow:0 14px 30px rgba(0,0,0,.25);
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:.3s ease;
+}
+
+.app-toast.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/*=========================
+RESPONSIVE ADICIONAL · STORYLINE
+=========================*/
+
+@media(max-width:1200px){
+
+  .storyline{
+    grid-template-columns:1fr;
+  }
+
+  .storyline-highlights{
+    flex-direction:row;
+    flex-wrap:wrap;
+  }
+
+  .storyline-chip{
+    flex:1 1 200px;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .storyline{
+    padding:24px;
+  }
+
+  .storyline-main h2{
+    font-size:21px;
+  }
+
+  .storyline-highlights{
+    flex-direction:column;
+  }
+
+}
+
+/*=========================
+PANTALLAS GRANDES (Power BI look)
+=========================*/
+
+@media(min-width:1600px){
+
+  .contenido{
+    padding:40px 60px;
+  }
+
+  .kpis{
+    grid-template-columns:repeat(6,1fr);
+  }
+
+}
+
+/*=========================
+IMPRESIÓN / EXPORTAR PDF
+=========================*/
+
+@media print{
+
+  .sidebar,
+  .filtros,
+  .btnCorreo,
+  .app-loader,
+  .app-toast{
+    display:none !important;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 7/10 · COMPARATIVO Y CUMPLIMIENTO SEMANAL
+        (dentro del Resumen Ejecutivo / Storytelling)
+====================================================*/
+
+.storyline-semanal{
+  grid-column:1 / -1;
+  position:relative;
+  z-index:1;
+  margin-top:8px;
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:20px 22px;
+}
+
+.storyline-semanal-titulo{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:10px;
+  font-size:15px;
+  font-weight:700;
+  color:#fff;
+  margin-bottom:14px;
+}
+
+.storyline-semanal-titulo span{
+  font-size:12px;
+  font-weight:500;
+  opacity:.78;
+}
+
+.storyline-tabla-scroll{
+  overflow-x:auto;
+  border-radius:12px;
+}
+
+.storyline-tabla{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13.5px;
+  min-width:640px;
+}
+
+.storyline-tabla thead th{
+  text-align:left;
+  padding:10px 12px;
+  font-size:12px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  color:rgba(255,255,255,.75);
+  border-bottom:1px solid rgba(255,255,255,.25);
+  white-space:nowrap;
+}
+
+.storyline-tabla tbody td{
+  padding:11px 12px;
+  color:#fff;
+  border-bottom:1px solid rgba(255,255,255,.12);
+  white-space:nowrap;
+}
+
+.storyline-tabla tbody tr:last-child td{
+  border-bottom:none;
+}
+
+.storyline-tabla .col-indicador{
+  font-weight:600;
+  white-space:nowrap;
+}
+
+.storyline-sindato{
+  font-style:italic;
+  opacity:.75;
+  font-size:12.5px;
+  white-space:normal !important;
+}
+
+.variacion-positiva{ color:#86efac; font-weight:700; }
+.variacion-negativa{ color:#fca5a5; font-weight:700; }
+.variacion-neutra{ color:rgba(255,255,255,.65); }
+
+.storyline-badge{
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.badge-ok{
+  background:rgba(74,222,128,.2);
+  color:#bbf7d0;
+  border:1px solid rgba(74,222,128,.4);
+}
+
+.badge-riesgo{
+  background:rgba(251,113,133,.2);
+  color:#fecdd3;
+  border:1px solid rgba(251,113,133,.4);
+}
+
+.badge-info{
+  background:rgba(148,163,184,.2);
+  color:#e2e8f0;
+  border:1px solid rgba(148,163,184,.35);
+}
+
+@media(max-width:768px){
+
+  .storyline-semanal{
+    padding:16px;
+  }
+
+  .storyline-tabla{
+    font-size:12.5px;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 8/10 · EVOLUCIÓN SEMANAL COMPLETA
+        Corrección de contraste + celdas con semáforo
+====================================================*/
+
+/*=========================
+CORRECCIÓN: las reglas globales de tabla
+(tbody tr:nth-child, hover, etc.) pintaban
+las filas pares en blanco sobre texto blanco.
+Se sobre-escriben con mayor especificidad.
+=========================*/
+
+.storyline-tabla tbody tr:nth-child(even){
+  background:rgba(255,255,255,.05);
+}
+
+.storyline-tabla tbody tr:hover{
+  background:rgba(255,255,255,.12);
+}
+
+.storyline-tabla tbody td:first-child{
+  color:#fff;
+}
+
+.storyline-tabla thead th small{
+  display:block;
+  font-weight:500;
+  text-transform:none;
+  opacity:.75;
+  font-size:10.5px;
+  margin-top:2px;
+}
+
+/*=========================
+TEXTO NARRATIVO EXTENDIDO
+=========================*/
+
+.storyline-detalle{
+  margin-top:14px;
+  padding-top:14px;
+  border-top:1px solid rgba(255,255,255,.18);
+  font-size:14px;
+  line-height:1.8;
+  opacity:.92;
+}
+
+/*=========================
+FILA DE LA SEMANA ACTUAL
+=========================*/
+
+.storyline-tabla tbody tr.fila-actual{
+  background:rgba(255,255,255,.14) !important;
+}
+
+.storyline-tabla tbody tr.fila-actual td{
+  font-weight:700;
+}
+
+/*=========================
+CELDAS CON SEMÁFORO
+(cumplimiento de meta)
+=========================*/
+
+.storyline-tabla td.celda-cumple{
+  background:rgba(74,222,128,.22);
+  color:#dcfce7;
+  font-weight:700;
+  border-radius:8px;
+}
+
+.storyline-tabla td.celda-alerta{
+  background:rgba(245,158,11,.22);
+  color:#fef3c7;
+  font-weight:700;
+  border-radius:8px;
+}
+
+.storyline-tabla td.celda-riesgo{
+  background:rgba(251,113,133,.22);
+  color:#fee2e2;
+  font-weight:700;
+  border-radius:8px;
+}
+
+.celda-sub{
+  display:block;
+  font-size:10.5px;
+  font-weight:500;
+  opacity:.85;
+  margin-top:2px;
+}
+
+@media(max-width:768px){
+
+  .storyline-detalle{
+    font-size:13px;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 9/10 · TABLA SEMANAL MÁS COMPACTA
+====================================================*/
+
+.storyline-semanal{
+  padding:16px 18px;
+}
+
+.storyline-tabla{
+  font-size:11.5px;
+  min-width:0;
+}
+
+.storyline-tabla thead th{
+  padding:7px 8px;
+  font-size:10px;
+  letter-spacing:.2px;
+}
+
+.storyline-tabla thead th small{
+  font-size:9px;
+}
+
+.storyline-tabla tbody td{
+  padding:7px 8px;
+}
+
+.storyline-tabla td.celda-cumple,
+.storyline-tabla td.celda-alerta,
+.storyline-tabla td.celda-riesgo{
+  border-radius:6px;
+  font-size:11.5px;
+}
+
+.celda-sub{
+  font-size:9px;
+  margin-top:1px;
+}
+
+.storyline-tabla-scroll{
+  position:relative;
+}
+
+/*=========================
+Indicador visual de que hay
+más contenido para desplazar
+(en vez de que se vea "cortado")
+=========================*/
+
+.storyline-tabla-scroll::after{
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  width:26px;
+  pointer-events:none;
+  background:linear-gradient(to right, transparent, rgba(0,53,95,.55));
+  border-radius:0 12px 12px 0;
+}
+
+@media(min-width:1300px){
+
+  /* En pantallas anchas normalmente ya entra sin scroll */
+
+  .storyline-tabla{
+    width:100%;
+    table-layout:fixed;
+  }
+
+  .storyline-tabla-scroll::after{
+    display:none;
+  }
+
+}
+
+@media(max-width:768px){
+
+  .storyline-tabla{
+    font-size:11px;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 10/10 · DISEÑO MÁS DINÁMICO
+====================================================*/
+
+/*=========================
+MÁS COLOR EN LOS KPIs
+(la paleta original solo cubría 6 tarjetas;
+ahora hay más KPIs en el panel)
+=========================*/
+
+.card:nth-child(7)::before{ background:linear-gradient(#0057B8,#60a5fa); }
+.card:nth-child(8)::before{ background:linear-gradient(#7c3aed,#a78bfa); }
+.card:nth-child(9)::before{ background:linear-gradient(#0d9488,#2dd4bf); }
+.card:nth-child(10)::before{ background:linear-gradient(#ca8a04,#fde047); }
+.card:nth-child(11)::before{ background:linear-gradient(#be123c,#fb7185); }
+.card:nth-child(12)::before{ background:linear-gradient(#1d4ed8,#38bdf8); }
+.card:nth-child(13)::before{ background:linear-gradient(#15803d,#4ade80); }
+
+/*=========================
+ENTRADA ANIMADA (más "vivo")
+=========================*/
+
+@keyframes entradaSuave{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+.card,
+.panel,
+.storyline{
+  animation:entradaSuave .5s ease both;
+}
+
+.kpis .card:nth-child(1){ animation-delay:.02s; }
+.kpis .card:nth-child(2){ animation-delay:.05s; }
+.kpis .card:nth-child(3){ animation-delay:.08s; }
+.kpis .card:nth-child(4){ animation-delay:.11s; }
+.kpis .card:nth-child(5){ animation-delay:.14s; }
+.kpis .card:nth-child(6){ animation-delay:.17s; }
+.kpis .card:nth-child(7){ animation-delay:.20s; }
+.kpis .card:nth-child(8){ animation-delay:.23s; }
+.kpis .card:nth-child(9){ animation-delay:.26s; }
+.kpis .card:nth-child(10){ animation-delay:.29s; }
+.kpis .card:nth-child(11){ animation-delay:.32s; }
+.kpis .card:nth-child(12){ animation-delay:.35s; }
+.kpis .card:nth-child(13){ animation-delay:.38s; }
+
+/*=========================
+ÍCONO DEL TÍTULO DE PANEL
+(insignia circular en vez de texto plano)
+=========================*/
+
+.panel h2{
+
+  position:relative;
+
+}
+
+.panel h2::before{
+
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--entel),#38bdf8);
+  display:inline-block;
+  margin-right:2px;
+  box-shadow:0 0 0 4px rgba(0,87,184,.12);
+
+}
+
+/*=========================
+KPI: leve resalte del número al pasar el mouse
+=========================*/
+
+.card:hover h2{
+  transform:scale(1.04);
+  transition:transform .25s ease;
+}
+
+/*=========================
+TABLAS: encabezados con un poco
+más de presencia visual
+=========================*/
+
+table thead th{
+  position:relative;
+}
+
+/*=========================
+SCROLLBAR MÁS DELGADA Y PROPIA
+DE LA MARCA (donde el navegador lo permita)
+=========================*/
+
+*::-webkit-scrollbar{
+  height:8px;
+  width:8px;
+}
+
+*::-webkit-scrollbar-thumb{
+  background:rgba(0,87,184,.35);
+  border-radius:8px;
+}
+
+*::-webkit-scrollbar-thumb:hover{
+  background:rgba(0,87,184,.55);
+}
+
+*::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 11/10 · PESTAÑAS + SCORE DETALLADO POR ASESOR
+====================================================*/
+
+/*=========================
+CONTROL DE VISTAS (PESTAÑAS)
+=========================*/
+
+.vista{
+  display:none;
+}
+
+.vista.vista-activa{
+  display:block;
+  animation:entradaSuave .4s ease both;
+}
+
+/*=========================
+SELECTOR DE ASESOR
+=========================*/
+
+.selector-score-wrapper{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.selector-score-wrapper label{
+  font-size:13.5px;
+  font-weight:600;
+  color:var(--gris);
+}
+
+.selector-score-wrapper select{
+  padding:10px 16px;
+  border-radius:12px;
+  border:1px solid var(--borde);
+  background:#fff;
+  font-size:14px;
+  font-weight:600;
+  color:#1e293b;
+  min-width:260px;
+  cursor:pointer;
+}
+
+.selector-score-wrapper select#filtroMesScore{
+  min-width:140px;
+}
+
+/*=========================
+SCORE: COMPARATIVO VS. MES ANTERIOR
+=========================*/
+
+.score-comparativo-mes{
+  margin:8px 0 4px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.score-comparativo-mes-anterior{
+  font-weight:500;
+  color:var(--gris);
+  margin-left:4px;
+}
+
+.indicador-comparativo-mes{
+  margin-top:6px;
+  font-size:11.5px;
+  font-weight:700;
+}
+
+/*=========================
+FICHA: MEDIDOR + INFO
+=========================*/
+
+.score-top{
+  display:flex;
+  align-items:center;
+  gap:28px;
+  margin-bottom:26px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--borde);
+  flex-wrap:wrap;
+}
+
+.gauge{
+  position:relative;
+  width:140px;
+  height:140px;
+  flex-shrink:0;
+}
+
+.gauge svg{
+  transform:rotate(-90deg);
+}
+
+.gauge-texto{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.gauge-texto strong{
+  font-size:32px;
+  color:var(--entel);
+  line-height:1;
+}
+
+.gauge-texto span{
+  font-size:11px;
+  color:var(--gris);
+  margin-top:4px;
+}
+
+.info-asesor{
+  flex:1;
+  min-width:260px;
+}
+
+.info-asesor h2{
+  margin:0 0 8px;
+  color:var(--entel);
+  font-size:24px;
+}
+
+.info-asesor p{
+  margin:10px 0 0;
+  color:var(--gris);
+  font-size:13.5px;
+  max-width:560px;
+  line-height:1.7;
+}
+
+.nivel-pill{
+  display:inline-block;
+  padding:5px 14px;
+  border-radius:20px;
+  font-weight:700;
+  font-size:12.5px;
+  border:1px solid transparent;
+}
+
+.nivel-pill.destacado{ background:rgba(22,163,74,.12); color:#16a34a; border-color:rgba(22,163,74,.35); }
+.nivel-pill.bueno{ background:rgba(101,163,13,.12); color:#65a30d; border-color:rgba(101,163,13,.35); }
+.nivel-pill.mejorable{ background:rgba(245,158,11,.12); color:#f59e0b; border-color:rgba(245,158,11,.35); }
+.nivel-pill.critico{ background:rgba(220,38,38,.12); color:#dc2626; border-color:rgba(220,38,38,.35); }
+
+/*=========================
+TARJETAS POR INDICADOR
+=========================*/
+
+.grid-indicadores{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+}
+
+.indicador-card{
+  border:1px solid var(--borde);
+  border-radius:14px;
+  padding:16px 18px;
+  transition:var(--transition);
+}
+
+.indicador-card:hover{
+  box-shadow:var(--shadow);
+  transform:translateY(-2px);
+}
+
+.indicador-card.ok{ border-left:5px solid #16a34a; }
+.indicador-card.warn{ border-left:5px solid #f59e0b; }
+.indicador-card.bad{ border-left:5px solid #dc2626; }
+
+.indicador-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+  gap:8px;
+}
+
+.indicador-nombre{
+  font-size:13.5px;
+  font-weight:700;
+  color:#1e293b;
+}
+
+.indicador-peso{
+  font-size:10.5px;
+  color:var(--gris);
+  background:#f1f5f9;
+  padding:2px 8px;
+  border-radius:20px;
+  white-space:nowrap;
+}
+
+.indicador-valores{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  font-size:12px;
+  color:var(--gris);
+  margin-bottom:6px;
+}
+
+.indicador-valores strong{
+  font-size:18px;
+  color:#1e293b;
+}
+
+.indicador-card .barra{
+  width:100%;
+  height:8px;
+  border-radius:6px;
+  background:#eef2f7;
+  overflow:hidden;
+}
+
+.indicador-card .barra > div{
+  height:100%;
+  border-radius:6px;
+}
+
+.indicador-nota{
+  font-size:11.5px;
+  color:var(--gris);
+  margin-top:8px;
+  line-height:1.5;
+}
+
+.puntos-tag{
+  font-size:11px;
+  font-weight:800;
+  color:var(--entel);
+}
+
+@media(max-width:768px){
+
+  .grid-indicadores{
+    grid-template-columns:1fr;
+  }
+
+  .score-top{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .selector-score-wrapper{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 12/10 · AJUSTES FINALES DE STORYTELLING
+====================================================*/
+
+/*=========================
+Resumen Ejecutivo ahora a
+ancho completo (sin chips)
+=========================*/
+
+.storyline-main-full{
+  grid-column:1 / -1;
+  max-width:none;
+}
+
+.storyline-main-full p,
+.storyline-main-full .storyline-detalle{
+  max-width:none;
+}
+
+/*=========================
+Cabeceras centradas en la
+tabla de Evolución Semanal
+=========================*/
+
+.storyline-tabla thead th{
+  text-align:center;
+}
+
+/*=========================
+Fila de TOTAL, distinguida
+de las filas por semana
+=========================*/
+
+.storyline-tabla tbody tr.fila-total{
+  background:rgba(255,255,255,.20) !important;
+  border-top:2px solid rgba(255,255,255,.4);
+}
+
+.storyline-tabla tbody tr.fila-total td{
+  font-weight:800;
+}
+
+/*=========================
+FILA TOTAL: Detalle por Ejecutivo
+=========================*/
+
+.fila-total-ejecutivos td{
+  background:var(--grisClaro);
+  border-top:2px solid var(--entel);
+}
+
+/*=========================
+COMPARATIVO SEMANAL POR ASESOR
+=========================*/
+
+.grid-comparativo-asesores{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+  gap:20px;
+}
+
+.asesor-comparativo-card{
+  background:#fff;
+  border:1px solid var(--borde);
+  border-radius:18px;
+  padding:20px 22px;
+  box-shadow:var(--shadow);
+  transition:var(--transition);
+  animation:entradaSuave .5s ease both;
+}
+
+.asesor-comparativo-card:hover{
+  transform:translateY(-2px);
+}
+
+.asesor-comparativo-card.acc-riesgo{
+  border-left:5px solid var(--rojo);
+}
+
+.acc-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.acc-header h3{
+  margin:0;
+  font-size:16px;
+  color:var(--entel);
+}
+
+.acc-story{
+  font-size:13px;
+  line-height:1.7;
+  color:var(--gris);
+  margin:0 0 14px;
+}
+
+.acc-story strong{
+  color:#1e293b;
+}
+
+.acc-variaciones{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.acc-var{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:2px;
+  background:var(--grisClaro);
+  border-radius:12px;
+  padding:8px 4px;
+  text-align:center;
+}
+
+.acc-var span:first-child{
+  font-size:10px;
+  color:var(--gris);
+  font-weight:600;
+}
+
+.acc-var strong{
+  font-size:14px;
+  color:#1e293b;
+}
+
+.acc-var-badge{
+  font-size:10.5px;
+  font-weight:700;
+  border-radius:8px;
+  padding:1px 6px;
+}
+
+.acc-var-badge.positivo{ color:#16a34a; background:rgba(22,163,74,.12); }
+.acc-var-badge.negativo{ color:#dc2626; background:rgba(220,38,38,.12); }
+.acc-var-badge.neutro{ color:var(--gris); background:rgba(100,116,139,.12); }
+
+.acc-sin-comparativo{
+  font-size:12px;
+  color:var(--gris);
+  background:var(--grisClaro);
+  border-radius:10px;
+  padding:8px 12px;
+  margin-bottom:16px;
+}
+
+.acc-tabla-scroll{
+  overflow-x:auto;
+}
+
+.acc-tabla-semanal{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+
+.acc-tabla-semanal thead th{
+  text-align:center;
+  padding:6px 4px;
+  color:var(--gris);
+  font-weight:700;
+  border-bottom:1px solid var(--borde);
+  white-space:nowrap;
+}
+
+.acc-tabla-semanal tbody td{
+  text-align:center;
+  padding:6px 4px;
+  border-bottom:1px solid var(--grisClaro);
+  white-space:nowrap;
+}
+
+.acc-tabla-semanal tbody tr.acc-fila-actual{
+  background:rgba(0,91,172,.06);
+  font-weight:700;
+}
+
+@media (max-width: 900px){
+
+  .grid-comparativo-asesores{
+    grid-template-columns:1fr;
+  }
+
+  .acc-variaciones{
+    grid-template-columns:repeat(3, 1fr);
+  }
+
+}
+
+@media (max-width: 480px){
+
+  .acc-variaciones{
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+}
+
+/*=========================
+COMPARATIVO DENTRO DE SCORE POR ASESOR
+(pestaña fusionada)
+=========================*/
+
+.comparativo-en-score{
+  margin-top:26px;
+  padding-top:22px;
+  border-top:1px solid var(--borde);
+}
+
+.comparativo-subtitulo{
+  font-size:13px;
+  font-weight:700;
+  color:var(--entel);
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:12px;
+}
+
+.comparativo-en-score .asesor-comparativo-card{
+  box-shadow:none;
+  padding:0;
+  border:none;
+  animation:none;
+}
+
+.comparativo-en-score .asesor-comparativo-card.acc-riesgo{
+  border-left:none;
+  padding-left:16px;
+  border-left:5px solid var(--rojo);
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 13 · NIVELES VISIBLES (MACRO -> MICRO)
+        Para facilitar la exposición ante gerencia
+====================================================*/
+
+.nivel-kicker{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin:8px 2px 14px;
+}
+
+.nivel-badge{
+  width:26px;
+  height:26px;
+  flex-shrink:0;
+  border-radius:50%;
+  background:var(--entel);
+  color:#fff;
+  font-size:12.5px;
+  font-weight:800;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.nivel-texto{
+  font-size:13px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--entel);
+  white-space:nowrap;
+}
+
+.nivel-linea{
+  flex:1;
+  height:1px;
+  background:linear-gradient(to right, rgba(0,91,172,.35), transparent);
+}
+
+@media(max-width:576px){
+
+  .nivel-texto{
+    font-size:11.5px;
+    white-space:normal;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 14 · FIX: DESBORDE HORIZONTAL EN MÓVIL
+        (grid/flex children con min-width:auto causaban
+        que el Resumen Ejecutivo se saliera de pantalla)
+====================================================*/
+
+.storyline,
+.storyline-main,
+.storyline-main-full,
+.storyline-highlights,
+.storyline-chips-row,
+.storyline-chip,
+.storyline-semanal,
+.grid-indicadores,
+.indicador-card{
+  min-width:0;
+}
+
+.storyline-main-full h2,
+.storyline-main-full p,
+.storyline-detalle,
+.storyline-chip strong,
+.storyline-chip span{
+  overflow-wrap:break-word;
+  word-break:break-word;
+}
+
+@media(max-width:480px){
+
+  .storyline{
+    padding:18px;
+  }
+
+  .storyline-main h2{
+    font-size:18px;
+  }
+
+  .nivel-kicker{
+    flex-wrap:wrap;
+  }
+
+  .nivel-linea{
+    flex-basis:100%;
+    margin-left:38px;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 15 · REFUERZO RESPONSIVE GLOBAL
+        (blindaje anti-desborde + últimos detalles
+        corporativos para que se vea bien en cualquier
+        dispositivo, de celular a monitor gerencial)
+====================================================*/
+
+/*=========================
+BLINDAJE ANTI-DESBORDE HORIZONTAL
+=========================*/
+
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+.app,
+.contenido,
+.panel,
+.grid2,
+.graficos,
+.storyline-main,
+.selector-score-wrapper,
+.comparativo-en-score{
+  min-width:0;
+}
+
+img, svg, canvas{
+  max-width:100%;
+}
+
+/*=========================
+TABLAS SIN WRAPPER PROPIO
+(scroll horizontal en vez de desborde)
+=========================*/
+
+.metodos-resumen{
+  overflow-x:auto;
+}
+
+/*=========================
+ENCABEZADOS DE VISTA
+(icono + título + subtítulo, más
+compactos y ordenados en móvil)
+=========================*/
+
+.headerDashboard h1{
+  line-height:1.25;
+}
+
+/*=========================
+RESPONSIVE 1024px
+(laptops chicas / tablets horizontales)
+=========================*/
+
+@media(max-width:1024px){
+
+  .sidebar{
+    width:230px;
+  }
+
+  .contenido{
+    padding:28px;
+  }
+
+}
+
+/*=========================
+RESPONSIVE 640px
+(celulares grandes)
+=========================*/
+
+@media(max-width:640px){
+
+  .contenido{
+    padding:16px;
+  }
+
+  .panel{
+    padding:20px;
+    border-radius:16px;
+  }
+
+  .headerDashboard h1{
+    font-size:22px;
+  }
+
+  .headerDashboard small{
+    font-size:12.5px;
+  }
+
+  .selector-score-wrapper select{
+    width:100%;
+    min-width:0;
+  }
+
+  .tabla-metodos,
+  .acc-tabla-semanal,
+  #tablaEjecutivos,
+  #tablaResumenGerencial{
+    font-size:11px;
+  }
+
+}
+
+/*=========================
+RESPONSIVE 400px
+(celulares angostos: iPhone SE y similares)
+=========================*/
+
+@media(max-width:400px){
+
+  .logo h2{
+    font-size:19px;
+  }
+
+  .sidebar nav a{
+    padding:8px 12px;
+    font-size:12px;
+  }
+
+  .kpis .card span{
+    font-size:12px;
+  }
+
+  .kpis .card h2{
+    font-size:20px;
+  }
+
+  .storyline-chips-row{
+    grid-template-columns:1fr;
+  }
+
+  .acc-variaciones{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .grid-indicadores{
+    grid-template-columns:1fr;
+  }
+
+}
+
+/*=========================
+IMPRESIÓN / EXPOSICIÓN EN PANTALLA GRANDE
+(monitores gerenciales anchos)
+=========================*/
+
+@media(min-width:1700px){
+
+  .contenido{
+    max-width:1700px;
+    margin:0 auto;
+  }
+
+}
+
+/*====================================================
+        DASHBOARD GERENCIAL ENTEL
+        PARTE 15 · RANKING GENERAL COMO DETALLE DIARIO
+        DE SOLICITUDES POR EJECUTIVO (POR PRODUCTIVIDAD)
+====================================================*/
+
+.tabla-ranking-diario{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11.5px;
+  table-layout:auto;
+}
+
+.tabla-ranking-diario thead th{
+  background:var(--entel);
+  color:#fff;
+  padding:6px 7px;
+  font-size:10px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.2px;
+  text-align:center;
+  white-space:normal;
+  position:sticky;
+  top:0;
+}
+
+.tabla-ranking-diario thead th.col-ejecutivo{
+  text-align:left;
+  position:sticky;
+  left:0;
+  z-index:2;
+  max-width:120px;
+}
+
+/* Segunda fila de cabecera (días dentro de una semana
+   expandida): se ubica debajo de la fila de semanas
+   para que el sticky vertical no se superponga */
+.tabla-ranking-diario thead tr:nth-child(2) th{
+  top:30px;
+}
+
+.tabla-ranking-diario tbody td{
+  padding:5px 7px;
+  text-align:center;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  white-space:normal;
+  word-break:break-word;
+}
+
+.tabla-ranking-diario tbody td.col-ejecutivo{
+  text-align:left;
+  font-weight:600;
+  background:inherit;
+  position:sticky;
+  left:0;
+  max-width:120px;
+}
+
+.tabla-ranking-diario .storyline-badge{
+  padding:2px 7px;
+  font-size:10px;
+  white-space:nowrap;
+}
+
+.tabla-ranking-diario tbody tr:hover{
+  filter:brightness(.97);
+}
+
+.tabla-ranking-diario tbody tr.fila-total-ejecutivos td{
+  background:var(--grisClaro);
+  border-top:2px solid var(--entel);
+  font-weight:800;
+}
+
+@media(max-width:768px){
+
+  .tabla-ranking-diario{
+    font-size:10.5px;
+  }
+
+}
+
+/*=========================
+SUBTÍTULO ENTRE TABLAS
+(Ranking General: Solicitudes / Habilitadas)
+=========================*/
+
+.subtitulo-tabla{
+  margin:26px 2px 12px;
+  font-size:16px;
+  font-weight:700;
+  color:var(--entel);
+  padding-top:18px;
+  border-top:1px solid var(--borde);
+}
+
+/*====================================================
+        MEJORAS · NUEVOS ESTILOS
+        (Deltas de KPI, semáforos, comparativo,
+        buscador, badge de alertas, tendencias,
+        seguimiento, historial IA, meta por canal)
+====================================================*/
+
+/*=========================
+KPI: DELTA VS. PERIODO ANTERIOR
+=========================*/
+
+.card-kpi{
+  position:relative;
+}
+
+.kpi-delta{
+  margin-top:6px;
+  font-size:11px;
+  font-weight:700;
+  display:none;
+}
+
+.kpis .card-kpi .kpi-delta{
+  display:block;
+}
+
+.kpi-delta-up{
+  color:var(--verde);
+}
+
+.kpi-delta-down{
+  color:var(--rojo);
+}
+
+.kpi-delta-sin{
+  color:var(--gris);
+  font-weight:500;
+}
+
+/*=========================
+KPI: BARRA META / REAL
+=========================*/
+
+.kpi-progress{
+  width:100%;
+  height:6px;
+  background:#edf2f7;
+  border-radius:20px;
+  margin-top:10px;
+  overflow:hidden;
+}
+
+.kpi-progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:20px;
+  background:var(--verde);
+  transition:width .6s, background .6s;
+}
+
+/*=========================
+KPI: SEMÁFORO
+=========================*/
+
+.card-kpi.kpi-ok{
+  border-left:4px solid var(--verde);
+}
+
+.card-kpi.kpi-alerta{
+  border-left:4px solid var(--amarillo);
+}
+
+.card-kpi.kpi-critico{
+  border-left:4px solid var(--rojo);
+}
+
+/*=========================
+BOTÓN COMPARAR PERIODOS
+=========================*/
+
+.btn-comparar{
+  padding:10px 16px;
+  border-radius:12px;
+  border:1.5px solid var(--entel);
+  background:#fff;
+  color:var(--entel);
+  font-weight:700;
+  font-size:13px;
+  cursor:pointer;
+  transition:var(--transition);
+  white-space:nowrap;
+}
+
+.btn-comparar:hover{
+  background:#eaf3fd;
+}
+
+.btn-comparar.activo{
+  background:var(--entel);
+  color:#fff;
+}
+
+/*=========================
+BADGE DE ALERTAS EN EL NAV
+=========================*/
+
+.nav-badge-alerta{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:20px;
+  height:20px;
+  padding:0 6px;
+  margin-left:8px;
+  border-radius:20px;
+  background:var(--rojo);
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  vertical-align:middle;
+}
+
+/*=========================
+BUSCADOR DE EJECUTIVO
+=========================*/
+
+.buscador-ejecutivo-wrapper{
+  margin:14px 0;
+}
+
+.buscador-ejecutivo{
+  width:100%;
+  max-width:340px;
+  padding:10px 14px;
+  border-radius:12px;
+  border:1.5px solid var(--borde);
+  font-size:13px;
+  outline:none;
+  transition:var(--transition);
+}
+
+.buscador-ejecutivo:focus{
+  border-color:var(--entel);
+  box-shadow:0 0 0 3px rgba(0,91,172,.12);
+}
+
+/*=========================
+RANKING: TENDENCIA SEMANAL
+=========================*/
+
+.tendencia-up{
+  color:var(--verde);
+  font-weight:800;
+}
+
+.tendencia-down{
+  color:var(--rojo);
+  font-weight:800;
+}
+
+.tendencia-flat{
+  color:var(--gris);
+  font-weight:800;
+}
+
+.tendencia-na{
+  color:var(--gris);
+  opacity:.5;
+}
+
+/*=========================
+RANKING: FILTRO RÁPIDO TOP/BOTTOM
+=========================*/
+
+.ranking-filtro-rapido{
+  display:flex;
+  gap:10px;
+  margin-bottom:14px;
+  flex-wrap:wrap;
+}
+
+.btn-filtro-rapido{
+  padding:8px 16px;
+  border-radius:20px;
+  border:1.5px solid var(--borde);
+  background:#fff;
+  color:#334155;
+  font-weight:700;
+  font-size:12.5px;
+  cursor:pointer;
+  transition:var(--transition);
+}
+
+.btn-filtro-rapido:hover{
+  border-color:var(--entel);
+}
+
+.btn-filtro-rapido.activo{
+  background:var(--entel);
+  border-color:var(--entel);
+  color:#fff;
+}
+
+/*=========================
+COACH IA: ACCIÓN SUGERIDA
+=========================*/
+
+.coach-accion{
+  display:inline-block;
+  margin-top:4px;
+  font-size:12px;
+  font-style:italic;
+  color:#475569;
+}
+
+/*=========================
+COACH IA: HISTORIAL DE ALERTAS
+=========================*/
+
+.coach-historial-lista{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.coach-historial-lista li{
+  display:flex;
+  justify-content:space-between;
+  padding:6px 0;
+  border-bottom:1px dashed var(--borde);
+  font-size:12.5px;
+}
+
+.coach-historial-lista li:last-child{
+  border-bottom:none;
+}
+
+/*=========================
+PRIORIDADES: SELECTOR DE SEGUIMIENTO
+=========================*/
+
+.card-supervision-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:8px;
+}
+
+.selector-seguimiento{
+  padding:6px 10px;
+  border-radius:10px;
+  border:1.5px solid var(--borde);
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  background:#f8fafc;
+}
+
+/*=========================
+EMBUDO: COMPARATIVO MES ANTERIOR
+=========================*/
+
+.funnel-comparativo-mes{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px dashed var(--borde);
+  font-size:13px;
+  color:#475569;
+}
+
+/*=========================
+MÉTODOS DE ENTREGA: META POR CANAL
+=========================*/
+
+.metodo-progress{
+  position:relative;
+}
+
+.metodo-meta-marcador{
+  position:absolute;
+  top:-2px;
+  width:2px;
+  height:12px;
+  background:#0f172a;
+}
+
+.metodo-meta-badge{
+  display:block;
+  font-size:10px;
+  font-weight:700;
+  margin-top:2px;
+}
+
+.metodo-meta-badge.cumple{
+  color:var(--verde);
+}
+
+.metodo-meta-badge.no-cumple{
+  color:var(--rojo);
+}
+
+/* =====================================
+   CUADRO DE RENTABILIDAD POR ASESOR
+====================================== */
+
+.rentab-leyenda{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.rentab-chip{
+  font-size:12px;
+  font-weight:600;
+  padding:5px 10px;
+  border-radius:20px;
+  background:rgba(100,116,139,.12);
+  color:var(--gris);
+}
+
+.rentab-chip.rentab-ok{
+  color:#16a34a;
+  background:rgba(22,163,74,.12);
+}
+
+.rentab-chip.rentab-bajo{
+  color:#dc2626;
+  background:rgba(220,38,38,.12);
+}
+
+.tabla-rentabilidad td.rentab-ok{
+  color:#16a34a;
+  background:rgba(22,163,74,.08);
+}
+
+.tabla-rentabilidad td.rentab-bajo{
+  color:#dc2626;
+  background:rgba(220,38,38,.08);
+}
+
+.tabla-rentabilidad .col-total-rentab{
+  background:rgba(15,23,42,.04);
+  font-weight:700;
+}
+
+/* =====================================
+   CUADRO DE ASESORES ACTIVOS
+====================================== */
+
+.rentab-chip.rentab-medio{
+  color:#b45309;
+  background:rgba(245,158,11,.14);
+}
+
+.tabla-rentabilidad td.rentab-medio{
+  color:#b45309;
+  background:rgba(245,158,11,.10);
+}
+
+.activos-toggle{
+  display:flex;
+  gap:8px;
+  margin-bottom:14px;
+}
+
+.activos-toggle button{
+  font-size:13px;
+  font-weight:600;
+  padding:7px 14px;
+  border-radius:8px;
+  border:1px solid rgba(100,116,139,.25);
+  background:#fff;
+  color:var(--gris);
+  cursor:pointer;
+}
+
+.activos-toggle button.activo{
+  background:var(--azul, #0057B8);
+  border-color:var(--azul, #0057B8);
+  color:#fff;
+}
+
+.tabla-activos th:nth-last-child(3),
+.tabla-activos td:nth-last-child(3){
+  border-left:2px solid rgba(15,23,42,.18);
+}
+
+.tabla-activos .fila-total-activos td{
+  border-top:2px solid rgba(15,23,42,.25);
+  background:rgba(15,23,42,.045);
+}
+
+.chip-baja{
+  font-size:10px;
+  font-weight:700;
+  color:#dc2626;
+  background:rgba(220,38,38,.12);
+  border-radius:10px;
+  padding:2px 6px;
+  margin-left:6px;
+  vertical-align:middle;
+}
+
+.switch-solo-activos{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  margin-left:8px;
+  user-select:none;
+}
+
+.switch-track{
+  width:38px;
+  height:20px;
+  border-radius:999px;
+  background:#cbd5e1;
+  position:relative;
+  transition:background .15s ease;
+}
+
+.switch-track.on{
+  background:#16a34a;
+}
+
+.switch-thumb{
+  position:absolute;
+  top:2px;
+  left:2px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff;
+  transition:left .15s ease;
+}
+
+.switch-track.on .switch-thumb{
+  left:20px;
+}
+
+.switch-label{
+  font-size:13px;
+  font-weight:600;
+  color:var(--gris);
+}
+
+.tabla-rentabilidad .fila-semana-rentab td{
+  font-size:12px;
+  opacity:.9;
+}

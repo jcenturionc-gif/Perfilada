@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Gerencial ENTEL</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+
+    <link rel="stylesheet"
+          href="styles.css?v=5">
+
+</head>
+
+<body>
+
+<!-- =====================================
+                LOADER INICIAL
+====================================== -->
+
+<div class="app-loader" id="appLoader">
+    <div class="app-loader-box">
+        <div class="app-loader-logo">ENTEL</div>
+        <div class="spinner"></div>
+        <span>Cargando información en tiempo real…</span>
+    </div>
+</div>
+
+<!-- =====================================
+                TOAST DE ERRORES
+====================================== -->
+
+<div class="app-toast" id="appToast"></div>
+
+<div class="app">
+
+    <!-- =====================================
+                    SIDEBAR
+    ====================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>ENTEL</h2>
+
+            <span>Dashboard Gerencial</span>
+
+        </div>
+
+        <nav>
+
+            <a class="activo" data-vista="vista-dashboard">
+                📊 Dashboard
+                <span class="nav-badge-alerta" id="navBadgeAlertas" style="display:none;">0</span>
+            </a>
+
+            <a data-vista="vista-score">
+                🎯 Score y Comparativo por Asesor
+            </a>
+
+            <a data-vista="vista-comparativo-mensual">
+                📆 Comparativo Mensual
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- =====================================
+                    CONTENIDO
+    ====================================== -->
+
+    <main class="contenido">
+
+      <div id="vista-dashboard" class="vista vista-activa">
+
+        <!-- HEADER -->
+
+        <header class="headerDashboard">
+
+            <div>
+
+                <h1>Dashboard Gerencial ENTEL</h1>
+
+                <small id="fechaActualizacion"></small>
+
+            </div>
+
+        </header>
+
+        <!-- =====================================
+                NIVEL 0 · MACRO
+                RESUMEN EJECUTIVO (STORYTELLING)
+        ====================================== -->
+
+        <section class="storyline" id="storyline"></section>
+
+        <!-- =====================================
+                    FILTROS
+        ====================================== -->
+
+        <section class="filtros">
+
+            <select id="filtroMes">
+                <option value="">Mes</option>
+            </select>
+
+            <select id="filtroSemana">
+                <option value="">Semana</option>
+            </select>
+
+            <select id="filtroNumeroDia">
+                <option value="">Día</option>
+            </select>
+
+            <select id="filtroDia">
+                <option value="">Día Semana</option>
+            </select>
+
+            <select id="filtroEjecutivo">
+                <option value="">Ejecutivo</option>
+            </select>
+
+            <select id="filtroAntiguedad">
+                <option value="">Antigüedad</option>
+            </select>
+
+            <button type="button" id="btnCompararPeriodo" class="btn-comparar">
+                🔁 Comparar vs. periodo anterior
+            </button>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 0.5 · MACRO
+                KPIs GLOBALES DEL PERIODO
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">1</span>
+            <span class="nivel-texto">Panorama General del Periodo</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="kpis">
+
+            <div class="card card-kpi" id="cardCuotaSol">
+                <span>🎯 Cumpl. Cuota Solicitudes</span>
+                <h2 id="kpiCuotaSol">0%</h2>
+                <div class="kpi-progress"><div class="kpi-progress-fill" id="progCuotaSol"></div></div>
+                <div class="kpi-delta" id="deltaCuotaSol"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardCuotaHab">
+                <span>✅ Cumpl. Cuota Habilitadas</span>
+                <h2 id="kpiCuotaHab">0%</h2>
+                <div class="kpi-progress"><div class="kpi-progress-fill" id="progCuotaHab"></div></div>
+                <div class="kpi-delta" id="deltaCuotaHab"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardSolicitudes">
+                <span>📋 Solicitudes</span>
+                <h2 id="kpiSolicitudes">0</h2>
+                <div class="kpi-delta" id="deltaSolicitudes"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardHabilitadas">
+                <span>✅ Habilitadas</span>
+                <h2 id="kpiHabilitadas">0</h2>
+                <div class="kpi-delta" id="deltaHabilitadas"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardConversion">
+                <span>🎯 Conversión</span>
+                <h2 id="kpiConversion">0%</h2>
+                <div class="kpi-delta" id="deltaConversion"></div>
+            </div>
+
+            <div class="card">
+                <span>👥 Ejecutivos Activos (Últ. día)</span>
+                <h2 id="kpiEjecutivos">0</h2>
+            </div>
+
+            <div class="card card-kpi" id="cardProductividad">
+                <span>⚡ Productividad</span>
+                <h2 id="kpiProductividad">0</h2>
+                <div class="kpi-delta" id="deltaProductividad"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardAdherencia">
+                <span>⏰ Adherencia</span>
+                <h2 id="kpiAdherencia">0%</h2>
+                <div class="kpi-delta" id="deltaAdherencia"></div>
+            </div>
+
+            <div class="card">
+                <span>📅 Programadas</span>
+                <h2 id="kpiProgramado">0</h2>
+            </div>
+
+            <div class="card">
+                <span>💻 Conectadas</span>
+                <h2 id="kpiConexion">0</h2>
+            </div>
+
+            <div class="card">
+                <span>🗂 Registros</span>
+                <h2 id="kpiRegistros">0</h2>
+            </div>
+
+            <div class="card">
+                <span>📞 Llamadas IN</span>
+                <h2 id="kpiLlamadasIN">0</h2>
+            </div>
+
+            <div class="card">
+                <span>📲 Llamadas OUT</span>
+                <h2 id="kpiLlamadasOUT">0</h2>
+            </div>
+
+        </section>
+                <!-- =====================================
+                NIVEL 1 · MACRO
+                TENDENCIA GENERAL DEL NEGOCIO
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">2</span>
+            <span class="nivel-texto">Tendencia del Negocio</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="graficos">
+
+            <div class="panel">
+
+                <h2>📈 Tendencia Comercial</h2>
+
+                <canvas id="graficoTendencia"></canvas>
+
+            </div>
+
+            <div class="panel">
+
+                <h2>📊 Gestión Comercial por Semana</h2>
+
+                <canvas id="graficoGestion"></canvas>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 2 · MACRO A MESO
+                DÓNDE SE PIERDE LA CONVERSIÓN
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">3</span>
+            <span class="nivel-texto">Embudo de Conversión</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>🔻 Embudo Comercial</h2>
+
+            <div id="panelEmbudo"></div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 3 · MESO
+                LECTURA E INTERPRETACIÓN (IA)
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">4</span>
+            <span class="nivel-texto">Lectura Gerencial del Equipo</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>🧠 Centro de Decisiones IA</h2>
+
+            <div id="coachIA"></div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 4 · MESO
+                RIESGOS Y PRIORIDADES DEL EQUIPO
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">5</span>
+            <span class="nivel-texto">Prioridades del Equipo</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>🚨 Prioridades del Equipo</h2>
+
+            <div id="panelSupervision"></div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 5 · MESO A MICRO
+                COMPARATIVO INDIVIDUAL
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">6</span>
+            <span class="nivel-texto">Comparativo Individual</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>🏆 Ranking General <small style="font-weight:500;font-size:13px;color:var(--gris);">(Detalle diario de Solicitudes, ordenado por Productividad)</small></h2>
+
+            <div id="panelRanking"></div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 6 · MICRO
+                MEZCLA OPERATIVA DE ENTREGA
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">7</span>
+            <span class="nivel-texto">Operación por Canal</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>📦 Métodos de Entrega</h2>
+
+            <div id="panelMetodosEntrega"></div>
+
+        </section>
+
+                <!-- =====================================
+                NIVEL 7 · MICRO
+                DETALLE POR EJECUTIVO
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">8</span>
+            <span class="nivel-texto">Detalle por Ejecutivo</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>👥 Detalle por Ejecutivo</h2>
+
+            <div class="buscador-ejecutivo-wrapper">
+                <input
+                    type="text"
+                    id="buscadorEjecutivo"
+                    class="buscador-ejecutivo"
+                    placeholder="🔎 Buscar ejecutivo por nombre…">
+            </div>
+
+            <div class="tablaResumenWrapper">
+
+            <table id="tablaEjecutivos">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Ejecutivo</th>
+                        <th>Solicitudes</th>
+                        <th>Habilitadas</th>
+                        <th>Conversión</th>
+                        <th>Productividad</th>
+                        <th>Adherencia</th>
+                        <th>% ESIM</th>
+                        <th>% E2H</th>
+                        <th>% EA</th>
+                        <th>% DR</th>
+                        <th>% RT</th>
+                        <th>Cumpl. Cuota Sol.</th>
+                        <th>Cumpl. Cuota Hab.</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+                NIVEL 8 · MICRO
+                RESUMEN GERENCIAL DIARIO (día a día)
+        ====================================== -->
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">9</span>
+            <span class="nivel-texto">Detalle Día a Día</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="panel">
+
+            <h2>📅 Resumen Gerencial Diario</h2>
+
+            <div class="tablaResumenWrapper">
+
+                <table id="tablaResumenGerencial">
+
+                    <thead></thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+      </div>
+      <!-- fin #vista-dashboard -->
+
+      <!-- =====================================
+              VISTA: SCORE POR ASESOR
+      ====================================== -->
+
+      <div id="vista-score" class="vista">
+
+        <header class="headerDashboard">
+
+            <div>
+
+                <h1>🎯 Score y Comparativo Semanal por Asesor</h1>
+
+                <small>Por qué se calificó así a cada asesor y cómo evolucionó semana a semana en el último mes</small>
+
+            </div>
+
+        </header>
+
+        <section class="panel">
+
+            <div class="selector-score-wrapper">
+
+                <label for="filtroMesScore">Mes</label>
+
+                <select id="filtroMesScore"></select>
+
+                <label for="selectorScoreAsesor">Selecciona un asesor</label>
+
+                <select id="selectorScoreAsesor"></select>
+
+            </div>
+
+            <div id="panelScoreDetalle"></div>
+
+            <div id="panelComparativoDetalle" class="comparativo-en-score"></div>
+
+        </section>
+
+      </div>
+      <!-- fin #vista-score -->
+
+      <!-- =====================================
+              VISTA: COMPARATIVO MENSUAL
+      ====================================== -->
+
+      <div id="vista-comparativo-mensual" class="vista">
+
+        <header class="headerDashboard">
+
+            <div>
+
+                <h1>📆 Comparativo Mensual</h1>
+
+                <small>Mes vs. mes, con desglose por semana y variación % contra el mes anterior</small>
+
+            </div>
+
+        </header>
+
+        <section class="panel">
+
+            <div id="panelComparativoMensual"></div>
+
+        </section>
+
+        <!-- =====================================
+                CUADRO DE RENTABILIDAD POR ASESOR
+        ====================================== -->
+
+        <section class="panel">
+
+            <h2>💰 Cuadro de Rentabilidad por Asesor</h2>
+
+            <div id="panelRentabilidad"></div>
+
+        </section>
+
+        <!-- =====================================
+                CUADRO DE ASESORES ACTIVOS
+        ====================================== -->
+
+        <section class="panel">
+
+            <h2>✅ Asesores Activos - Cumplimiento y Productividad</h2>
+
+            <div id="panelAsesoresActivos"></div>
+
+        </section>
+
+      </div>
+      <!-- fin #vista-comparativo-mensual -->
+
+    </main>
+
+</div>
+
+<!-- =====================================
+        LIBRERÍAS
+====================================== -->
+
+<!-- Chart.js -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Plugin DataLabels -->
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<!-- =====================================
+        CONFIGURACIÓN
+====================================== -->
+
+<script src="js/config.js?v=7"></script>
+
+<script src="js/api.js?v=7"></script>
+
+<!-- =====================================
+        MOTOR DEL DASHBOARD
+====================================== -->
+
+<script src="js/kpis.js?v=7"></script>
+
+<script src="js/resumenEjecutivos.js?v=7"></script>
+
+<script src="js/score.js?v=7"></script>
+
+<script src="js/scoreDetalle.js?v=7"></script>
+
+<script src="js/tabs.js?v=7"></script>
+
+<script src="js/ranking.js?v=7"></script>
+
+<script src="js/semanaUtils.js?v=7"></script>
+<script src="js/filters.js?v=7"></script>
+<!-- =====================================
+        MÓDULOS DEL DASHBOARD
+====================================== -->
+
+<script src="js/executive.js?v=7"></script>
+
+<script src="js/coach.js?v=7"></script>
+
+<script src="js/supervision.js?v=7"></script>
+
+<script src="js/supervisionView.js?v=7"></script>
+
+<script src="js/rankingView.js?v=7"></script>
+
+<script src="js/funnel.js?v=7"></script>
+
+<script src="js/funnelView.js?v=7"></script>
+
+<script src="js/metodosEntrega.js?v=7"></script>
+
+<script src="js/weekly.js?v=7"></script>
+
+<script src="js/comparativoSemanal.js?v=7"></script>
+
+<script src="js/comparativoMensual.js?v=7"></script>
+
+<script src="js/rentabilidad.js?v=7"></script>
+<script src="js/activosKpis.js?v=1"></script>
+
+<script src="js/charts.js?v=7"></script>
+
+<script src="js/resumenGerencial.js?v=7"></script>
+
+<script src="js/storyline.js?v=7"></script>
+
+<!-- =====================================
+        MEJORAS (comparativos, buscador,
+        semáforos, badges, checklist)
+====================================== -->
+
+<script src="js/mejoras.js?v=7"></script>
+
+<!-- =====================================
+        DASHBOARD PRINCIPAL
+        (SIEMPRE EL ÚLTIMO)
+====================================== -->
+
+<script src="js/dashboard.js?v=7"></script>
+
+<!-- =====================================
+        EXPORTAR PDF
+====================================== -->
+
+</body>
+
+</html>
