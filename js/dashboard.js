@@ -303,6 +303,8 @@ function poblarTablaEjecutivos() {
 
         <td><strong>${adherencia().toFixed(1)}%</strong></td>
 
+        <td><strong>${formatearTiempoStoryline(tmo())}</strong></td>
+
         <td><strong>${representacionEsim().toFixed(1)}%</strong></td>
 
         <td><strong>${representacionE2H().toFixed(1)}%</strong></td>
