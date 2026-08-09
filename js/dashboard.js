@@ -223,7 +223,7 @@ function poblarTablaEjecutivos() {
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="13" style="text-align:center;">
+                <td colspan="14" style="text-align:center;">
                     No existen datos disponibles.
                 </td>
             </tr>
@@ -256,6 +256,8 @@ function poblarTablaEjecutivos() {
             <td>${e.productividad.toFixed(2)}</td>
 
             <td>${e.adherencia.toFixed(1)}%</td>
+
+            <td>${formatearTiempoStoryline(e.tmo)}</td>
 
             <td>${e.repESIM.toFixed(1)}%</td>
 

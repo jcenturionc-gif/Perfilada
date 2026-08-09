@@ -39,6 +39,7 @@ function obtenerResumenEjecutivos(datos) {
                 llamadasIN: 0,
                 llamadasOUT: 0,
                 registros: 0,
+                tiempoHablado: 0,
 
                 //----------------------------------
                 // Operación
@@ -93,6 +94,7 @@ function obtenerResumenEjecutivos(datos) {
         r.llamadasIN += Number(f["LLAMADAS IN"] || 0);
         r.llamadasOUT += Number(f["LLAMADAS OU"] || 0);
         r.registros += Number(f["REGISTROS"] || 0);
+        r.tiempoHablado += Number(f["TIEMPO HABLADO"] || 0);
 
         //----------------------------------
         // OPERACIÓN
@@ -189,6 +191,15 @@ function obtenerResumenEjecutivos(datos) {
 
         r.totalLlamadas =
             r.llamadasIN + r.llamadasOUT;
+
+        //----------------------------------
+        // TMO
+        //----------------------------------
+
+        r.tmo =
+            r.totalLlamadas > 0
+                ? r.tiempoHablado / r.totalLlamadas
+                : 0;
 
         //----------------------------------
         // EFECTIVIDAD
