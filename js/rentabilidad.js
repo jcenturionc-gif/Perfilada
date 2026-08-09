@@ -13,21 +13,6 @@ const PAGO_HABILITADA_HOGAR = 35;
 const PUNTO_EQUILIBRIO_RENTABILIDAD = 1200;
 
 window.mesesColapsadosRentabilidad = window.mesesColapsadosRentabilidad || {};
-window.soloActivosRentabilidad = (window.soloActivosRentabilidad === undefined) ? false : window.soloActivosRentabilidad;
-
-//----------------------------------
-// Alterna ON (solo asesores activos según
-// el último día de gestión) / OFF (todos
-// los asesores con registros históricos)
-//----------------------------------
-
-function toggleSoloActivosRentabilidad() {
-
-    window.soloActivosRentabilidad = !window.soloActivosRentabilidad;
-
-    construirCuadroRentabilidad();
-
-}
 
 //----------------------------------
 // Alternar (colapsar / expandir) un mes
@@ -115,21 +100,11 @@ function construirCuadroRentabilidad() {
         .sort((a, b) => orden.indexOf(a) - orden.indexOf(b));
 
     //----------------------------------
-    // Asesores (filas): todos con historial,
-    // o solo los activos según el último día
-    // registrado en masterData (toggle)
+    // Asesores (filas), orden alfabético
     //----------------------------------
 
-    const soloActivos = window.soloActivosRentabilidad;
-
-    const todosLosAsesores = [...new Set(base.map(f => f["EJECUTIVO"]).filter(Boolean))]
+    const asesores = [...new Set(base.map(f => f["EJECUTIVO"]).filter(Boolean))]
         .sort((a, b) => a.localeCompare(b));
-
-    const asesoresActivos = (typeof nombresAsesoresActivosGlobal === "function")
-        ? nombresAsesoresActivosGlobal()
-        : todosLosAsesores;
-
-    const asesores = soloActivos ? asesoresActivos : todosLosAsesores;
 
     if (!asesores.length) {
 
@@ -314,23 +289,11 @@ function construirCuadroRentabilidad() {
     panel.innerHTML = `
 
         <div class="rentab-leyenda">
-            <span class="rentab-chip">👥 ${soloActivos ? "Asesores activos (último día)" : "Todos los asesores"}: ${asesores.length}</span>
             <span class="rentab-chip">💵 Móvil habilitada: $${PAGO_HABILITADA_MOVIL.toFixed(1)}</span>
             <span class="rentab-chip">🏠 Hogar habilitada: $${PAGO_HABILITADA_HOGAR.toFixed(1)}</span>
             <span class="rentab-chip">⚖️ Punto de equilibrio: ${formatearUSDRentabilidad(PUNTO_EQUILIBRIO_RENTABILIDAD)} / asesor</span>
             <span class="rentab-chip rentab-ok">■ Sobre equilibrio</span>
             <span class="rentab-chip rentab-bajo">■ Bajo equilibrio</span>
-        </div>
-
-        <div class="activos-toggle">
-
-            <span class="switch-solo-activos" onclick="toggleSoloActivosRentabilidad()">
-                <span class="switch-track ${soloActivos ? "on" : "off"}">
-                    <span class="switch-thumb"></span>
-                </span>
-                <span class="switch-label">${soloActivos ? "Solo asesores activos (último día)" : "Incluir todos los asesores (con bajas)"}</span>
-            </span>
-
         </div>
 
         <div class="tablaResumenWrapper">
