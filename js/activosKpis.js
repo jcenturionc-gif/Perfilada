@@ -120,7 +120,7 @@ function calcularPctAsesorMes(asesor, mes) {
 
     const metaProductividad = (typeof CONFIG !== "undefined")
         ? CONFIG.METAS.PRODUCTIVIDAD
-        : 1.5;
+        : 2;
 
     const cumplProductividad = metaProductividad ? (productividad / metaProductividad) * 100 : 0;
 
@@ -155,7 +155,7 @@ function calcularPctGrupoMes(asesoresGrupo, mes) {
 
     const metaProductividad = (typeof CONFIG !== "undefined")
         ? CONFIG.METAS.PRODUCTIVIDAD
-        : 1.5;
+        : 2;
 
     const cumplProductividad = metaProductividad ? (productividad / metaProductividad) * 100 : 0;
 

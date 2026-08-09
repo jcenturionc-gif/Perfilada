@@ -25,13 +25,22 @@ function construirStoryline() {
         const metaProductividad = metas.PRODUCTIVIDAD || 0;
 
         const brecha = conv - metaConversion;
-        const cumple = brecha >= 0;
-        const cerca = !cumple && brecha >= -10;
+
+        // El tono del resumen ejecutivo debe reflejar el estado GENERAL del
+        // negocio (cuota solicitudes + cuota habilitadas + conversión), no
+        // solo la conversión — de lo contrario el titular puede decir
+        // "semana en verde" mientras una cuota está muy por debajo de meta.
+        const brechaSol = cumplSol - 100;
+        const brechaHab = cumplHab - 100;
+        const peorBrecha = Math.min(brecha, brechaSol, brechaHab);
+
+        const cumple = peorBrecha >= 0;
+        const cerca = !cumple && peorBrecha >= -10;
 
         const tono = cumple ? "positivo" : (cerca ? "alerta" : "critico");
 
         const titulo = cumple
-            ? "Semana en verde: el equipo supera la meta de conversión"
+            ? "Semana en verde: el equipo cumple sus metas clave"
             : cerca
                 ? "A un paso de la meta: hay margen para acelerar"
                 : "Semana bajo meta: se requieren acciones inmediatas";

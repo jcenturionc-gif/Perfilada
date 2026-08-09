@@ -71,6 +71,10 @@
                 📆 Comparativo Mensual
             </a>
 
+            <a data-vista="vista-plan-accion">
+                🚀 Plan de Acción
+            </a>
+
         </nav>
 
     </aside>
@@ -151,7 +155,13 @@
             <span class="nivel-linea"></span>
         </div>
 
-        <section class="kpis">
+        <div class="nivel-kicker">
+            <span class="nivel-badge">R</span>
+            <span class="nivel-texto">Resultado — ¿cómo vamos vs. la meta?</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="kpis kpis-primary">
 
             <div class="card card-kpi" id="cardCuotaSol">
                 <span>🎯 Cumpl. Cuota Solicitudes</span>
@@ -167,6 +177,28 @@
                 <div class="kpi-delta" id="deltaCuotaHab"></div>
             </div>
 
+            <div class="card card-kpi" id="cardConversion">
+                <span>🎯 Conversión</span>
+                <h2 id="kpiConversion">0%</h2>
+                <div class="kpi-delta" id="deltaConversion"></div>
+            </div>
+
+            <div class="card card-kpi" id="cardProductividad">
+                <span>⚡ Productividad</span>
+                <h2 id="kpiProductividad">0</h2>
+                <div class="kpi-delta" id="deltaProductividad"></div>
+            </div>
+
+        </section>
+
+        <div class="nivel-kicker">
+            <span class="nivel-badge">A</span>
+            <span class="nivel-texto">Actividad — detalle operativo</span>
+            <span class="nivel-linea"></span>
+        </div>
+
+        <section class="kpis kpis-secondary">
+
             <div class="card card-kpi" id="cardSolicitudes">
                 <span>📋 Solicitudes</span>
                 <h2 id="kpiSolicitudes">0</h2>
@@ -179,21 +211,9 @@
                 <div class="kpi-delta" id="deltaHabilitadas"></div>
             </div>
 
-            <div class="card card-kpi" id="cardConversion">
-                <span>🎯 Conversión</span>
-                <h2 id="kpiConversion">0%</h2>
-                <div class="kpi-delta" id="deltaConversion"></div>
-            </div>
-
             <div class="card">
                 <span>👥 Ejecutivos Activos (Últ. día)</span>
                 <h2 id="kpiEjecutivos">0</h2>
-            </div>
-
-            <div class="card card-kpi" id="cardProductividad">
-                <span>⚡ Productividad</span>
-                <h2 id="kpiProductividad">0</h2>
-                <div class="kpi-delta" id="deltaProductividad"></div>
             </div>
 
             <div class="card card-kpi" id="cardAdherencia">
@@ -228,10 +248,6 @@
             </div>
 
         </section>
-                <!-- =====================================
-                NIVEL 1 · MACRO
-                TENDENCIA GENERAL DEL NEGOCIO
-        ====================================== -->
 
         <div class="nivel-kicker">
             <span class="nivel-badge">2</span>
@@ -536,6 +552,94 @@
       </div>
       <!-- fin #vista-comparativo-mensual -->
 
+      <!-- =====================================
+              VISTA: PLAN DE ACCIÓN
+      ====================================== -->
+
+      <div id="vista-plan-accion" class="vista">
+
+        <header class="headerDashboard">
+
+            <div>
+
+                <h1>🚀 Plan de Acción</h1>
+
+                <small>Periodo oficial: 10 al 31 de agosto de 2026 · 22 días calendario · Meta: 2 portabilidades diarias por asesor</small>
+
+            </div>
+
+        </header>
+
+        <!-- =====================================
+                LÍNEA DE TIEMPO DE FASES
+        ====================================== -->
+
+        <section class="panel">
+
+            <h2>🗓️ Fases del Plan</h2>
+
+            <div id="planAccionLineaTiempo" class="fases-plan-accion-grid"></div>
+
+        </section>
+
+        <!-- =====================================
+                KPIs / DISTRIBUCIÓN POR CUARTIL
+        ====================================== -->
+
+        <section class="kpis" id="planAccionKpis"></section>
+
+        <!-- =====================================
+                PLAYBOOK POR CUARTIL
+        ====================================== -->
+
+        <section class="panel">
+
+            <h2>📋 Acciones por Cuartil</h2>
+
+            <div id="planAccionPlaybook" class="playbook-plan-accion-grid"></div>
+
+        </section>
+
+        <!-- =====================================
+                MATRIZ DE DIAGNÓSTICO INDIVIDUAL
+        ====================================== -->
+
+        <section class="panel">
+
+            <h2>🧭 Matriz de Diagnóstico Individual <small style="font-weight:500;font-size:13px;color:var(--gris);">(Entregable Fase 1 · ordenado de menor a mayor productividad)</small></h2>
+
+            <div id="planAccionNotaFuente" style="font-size:12px;color:var(--gris);margin:-6px 0 14px;"></div>
+
+            <div class="tablaResumenWrapper">
+
+            <table id="tablaPlanAccion">
+
+                <thead>
+                    <tr>
+                        <th>Ejecutivo</th>
+                        <th>Prod. Julio (base)</th>
+                        <th>Cuartil Julio</th>
+                        <th>Prod. Agosto (avance)</th>
+                        <th>Variación</th>
+                        <th>Cuartil Agosto</th>
+                        <th>Brecha vs. meta (2.00)</th>
+                        <th>Prioridad</th>
+                        <th>Causa raíz (coaching IA)</th>
+                        <th>Decisión</th>
+                    </tr>
+                </thead>
+
+                <tbody></tbody>
+
+            </table>
+
+            </div>
+
+        </section>
+
+      </div>
+      <!-- fin #vista-plan-accion -->
+
     </main>
 
 </div>
@@ -605,6 +709,8 @@
 <script src="js/comparativoMensual.js?v=7"></script>
 
 <script src="js/rentabilidad.js?v=7"></script>
+<script src="js/diagnosticoCualitativo.js?v=1"></script>
+<script src="js/planAccion.js?v=1"></script>
 <script src="js/activosKpis.js?v=1"></script>
 
 <script src="js/charts.js?v=7"></script>

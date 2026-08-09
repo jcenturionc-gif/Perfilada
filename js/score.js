@@ -31,7 +31,9 @@ const PESOS_SCORE = {
 
 const METAS = {
 
-    conversion:80,
+    // Se toma de CONFIG.METAS.CONVERSION (config.js) para no duplicar
+    // la meta de conversión en dos lugares distintos del código.
+    conversion: (typeof CONFIG !== "undefined") ? CONFIG.METAS.CONVERSION : 80,
 
     esim:15,
 

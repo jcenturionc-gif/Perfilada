@@ -11,7 +11,7 @@ const CONFIG = {
   METAS: {
 
       CONVERSION: 80,
-      PRODUCTIVIDAD: 1.50,
+      PRODUCTIVIDAD: 2,
       ADHERENCIA: 95,
       CUMPLIMIENTO: 100
 

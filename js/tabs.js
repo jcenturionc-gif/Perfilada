@@ -80,6 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
+            //----------------------------------
+            // Al entrar a la pestaña de
+            // Plan de Acción, construirla
+            //----------------------------------
+
+            if (destino === "vista-plan-accion" && typeof construirPlanAccion === "function") {
+
+                construirPlanAccion();
+
+            }
+
         });
 
     });
