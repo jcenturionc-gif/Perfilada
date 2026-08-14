@@ -5,7 +5,7 @@
 const CONFIG = {
 
   // URL de Google Apps Script
-  API_URL: "https://script.google.com/macros/s/AKfycbyo26c1i-P6KoKtMsjEFA2BO5z9VYugud3V2Gdgua3-uZ32WhKC0kQty4Yf-Fx3eDo/exec",
+  API_URL: "https://script.google.com/macros/s/AKfycbyoROWs4xbSSdxA3r8m3VjsJoR8zB5VeOmWb81dC_tkIKwICea2Mhplm91SH3_ahw/exec",
 
   // Metas del negocio
   METAS: {
