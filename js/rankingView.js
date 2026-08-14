@@ -407,9 +407,18 @@ function construirRankingView() {
 
     const totalGeneral = filas.reduce((s, f) => s + f.totalSolicitudes, 0);
 
-    const productividadPromedio = filas.length
+    // Productividad del Total = solicitudes totales / días de conexión
+    // totales (misma fórmula ponderada que usa el KPI general del
+    // dashboard). Antes se promediaban las productividades individuales
+    // de cada ejecutivo con el mismo peso, lo que no coincidía con el
+    // KPI general porque no consideraba que cada uno trabajó una
+    // cantidad distinta de días.
 
-        ? filas.reduce((s, f) => s + f.productividad, 0) / filas.length
+    const totalDiasConexion = filas.reduce((s, f) => s + f.diasConexion, 0);
+
+    const productividadPromedio = totalDiasConexion
+
+        ? totalGeneral / totalDiasConexion
 
         : 0;
 
